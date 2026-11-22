@@ -19,7 +19,7 @@
     get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 部分瀏覽器不允許 */ } }
   };
-  const art = k => `art/${k}.jpg`;
+  const art = k => `${k}.jpg`;
   const icon = (k, cls = '') => `<img class="ic ${cls}" src="${art(k)}" alt="">`;
   const user = () => store.get('fq_user', null);
   const done = () => store.get('fq_done', {});
