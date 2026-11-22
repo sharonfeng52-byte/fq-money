@@ -136,8 +136,6 @@
   function applyLang() {
     document.documentElement.lang = isEN() ? 'en' : 'zh-Hant';
     document.title = C.title;
-    // 英文版先用西文字體，避免中文字體把 ’ 等符號顯示得太闊
-    document.body.style.fontFamily = isEN() ? '"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans TC",sans-serif' : '';
   }
   function setLang(l) { LANG = l; store.set('fq_lang', l); C = content(); applyLang(); route(); }
 

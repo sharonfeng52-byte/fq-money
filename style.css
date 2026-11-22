@@ -1,4 +1,6 @@
 :root{
+  --font-head:"Fredoka","Huninn","Chiron GoRound TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  --font-body:"Nunito","Chiron GoRound TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   --navy:#1F3A68;--ink:#1F2A44;--muted:#6B7A99;--paper:#FFFDF7;--line:#c9d1de;
   --b:#1F5FA8;--bl:#E6F1FC;--bb:#5B9BD8;
   --g:#2E7D32;--gl:#EAF6E3;--gb:#7CB85A;
@@ -8,7 +10,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{font-family:"Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei",sans-serif;background:#EEF4FB;color:var(--ink);line-height:1.55;font-size:16px}
+body{font-family:var(--font-body);letter-spacing:.01em;background:#EEF4FB;color:var(--ink);line-height:1.55;font-size:16px}
 img{max-width:100%;display:block}
 button,input,select,textarea{font:inherit;color:inherit}
 a{color:inherit}
@@ -126,3 +128,12 @@ textarea{min-height:70px;resize:vertical}
 .tabs button.on{background:var(--c);color:#fff}
 #qr{background:#fff;padding:14px;border-radius:16px;display:inline-block;margin-top:10px}
 @media (max-width:520px){.hero h1{font-size:21px}.ban h1{font-size:21px}.lesson-card img{width:100px}.brow{grid-template-columns:100px 1fr 48px}}
+
+/* 標題用圓潤字體；粉圓只有一種粗細，關閉假粗體避免字形變形 */
+h1,h2,.top a,.ban .no,.lesson-card b,.tag,.btn,.gold,.opt,.tabs button,.big,.node b,.method b,.rank li b,.rank li span,.nav a,.chip{
+  font-family:var(--font-head);font-synthesis:none}
+h1,h2,.top a,.lesson-card b,.gold,.big{font-weight:600;letter-spacing:.02em}
+.btn,.tag,.opt,.tabs button,.ban .no,.chip,.node b,.method b{font-weight:600}
+.ban h1,.hero h1{line-height:1.3}
+.lesson-card b{font-size:18px}
+.node span,.method span{font-size:15px}
