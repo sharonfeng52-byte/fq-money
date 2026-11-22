@@ -8,5 +8,14 @@ window.FQ_CONFIG = {
   GROUPS: 4,
 
   // 導師大屏自動更新的間隔（秒）
-  REFRESH_SECONDS: 10
+  REFRESH_SECONDS: 10,
+
+  // OpenMAIC 完整課堂連結：把課堂網址貼在對應堂數的引號內。
+  // 留空 '' = 該堂不顯示「觀看完整課堂」按鈕。
+  CLASSROOM_URLS: {
+    1: '',
+    2: '',
+    3: '',
+    4: ''
+  }
 };

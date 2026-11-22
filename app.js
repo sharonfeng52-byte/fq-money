@@ -278,8 +278,12 @@
     const L = C.lessons[n]; if (!L) return pageHome();
     const polls = Object.entries(C.polls).filter(([, p]) => p.lesson === n);
     const walls = Object.entries(C.walls).filter(([, w]) => w.lesson === n);
+    const classUrl = ((window.FQ_CONFIG || {}).CLASSROOM_URLS || {})[n] || '';
     shell(`<div class="${L.cls}">
       ${banner(n)}
+      ${/^https:\/\//.test(classUrl) ? `<section class="card"><h2>${isEN() ? '🎬 Watch the full lesson' : '🎬 觀看完整課堂'}</h2>
+        <p class="muted">${isEN() ? 'An AI-led interactive version of this lesson. Opens in a new tab.' : '由 AI 老師帶領的互動版本，會在新分頁開啟。'}</p>
+        <a class="btn c full" style="display:block;text-align:center;text-decoration:none" href="${esc(classUrl)}" target="_blank" rel="noopener">${isEN() ? 'Start the lesson ›' : '開始上課 ›'}</a></section>` : ''}
       <section class="card"><h2><span class="n">1</span>${t('nodes')}</h2>
         <div class="grid2">${L.nodes.map(([a, b]) => `<div class="node"><b>${esc(a)}</b><span>${esc(b)}</span></div>`).join('')}</div></section>
       <section class="card"><h2><span class="n">2</span>${t('methods')}</h2>
