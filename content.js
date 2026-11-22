@@ -75,3 +75,84 @@ window.FQ = {
             ['關顯彬《少年錢滋味》', '以本地少年生活談消費與理財。']]
   }
 };
+
+// ===== English version (same structure as FQ above) =====
+window.FQ_EN = {
+  title: 'One Banknote, Different Worlds',
+  mainline: 'Limited resources → value judgement → responsible choices',
+  motto: 'Learning to manage money is learning to choose your future.',
+
+  methods: {
+    1: { name: 'Think it over', q: "Do I really need it? What happens if I don't buy it?" },
+    2: { name: 'Compare', q: 'Is it just cheaper, or better value overall?' },
+    3: { name: 'Use it up', q: 'Have I really used up the value of what I already have?' },
+    4: { name: 'Repair before replacing', q: 'Repair, reuse or buy new — which makes more sense?' },
+    5: { name: 'Borrow, swap, share', q: 'Do I have to own it to use it?' },
+    6: { name: 'Save what you don’t spend', q: 'Where does the money I save go?' },
+    7: { name: 'Invest in the future', q: 'How can today’s resources create long-term value?' }
+  },
+
+  path: ['See what I have', 'Know what matters', 'See the cost', 'Make a choice', 'Take responsibility', 'Leave choices for tomorrow'],
+
+  lessons: {
+    1: {
+      title: 'The secret of $100', domain: 'Know money', en: '認識金錢',
+      nodes: [['Where money comes from', 'Money doesn’t appear out of thin air.'], ['Exchange and value', 'Price isn’t the same as value; everything has a cost.'],
+              ['Scarcity', 'Resources are limited, so take good care of them.'], ['Purchasing power', 'Money’s value changes, so learn to compare.']],
+      gold: 'Price is what you pay; value is what you get.', ws: 'W1 · My $100'
+    },
+    2: {
+      title: 'What is an hour worth?', domain: 'Earn money', en: '賺取金錢',
+      nodes: [['Jobs and careers', 'Different jobs create different value.'], ['Time and effort', 'Time is a precious resource; effort brings rewards.'],
+              ['Skills and learning', 'Grow your abilities to open up more ways to earn.'], ['Creating value', 'Become someone who adds value.']],
+      gold: 'First the sweat, then the salary.', ws: 'W2 · My skill growth'
+    },
+    3: {
+      title: 'Skip it today, gain what?', domain: 'Save money', en: '儲蓄金錢',
+      nodes: [['SMART goals', 'Set a goal and save with a plan.'], ['Delayed gratification', 'Don’t rush to spend now; gain bigger choices later.'],
+              ['Emergency fund', 'Keep money aside for the unexpected.'], ['Spending control', 'Cut impulse buys; spend on what truly matters.']],
+      gold: 'No miracles, just steady saving.', ws: 'W3 · SMART savings plan'
+    },
+    4: {
+      title: 'Is a want the same as a need?', domain: 'Spend wisely', en: '消費金錢',
+      nodes: [['Needs vs wants', 'Ask yourself first: do I really need it?'], ['Compare and choose', 'Compare three shops and choose what fits best.'],
+              ['Peers and ads', 'Don’t be swayed; think for yourself.'], ['Impulse buying', 'Stop, think, and avoid regret.']],
+      gold: 'Tell your needs from your wants — it’s worth learning.', ws: 'W4 · Buy, don’t buy or wait'
+    }
+  },
+
+  polls: {
+    L3_stand: { q: 'Spend $20 on a small treat now, or keep $20 towards a $60 goal?' },
+    L4_ad: { q: 'Which line tempts you most?' }
+  },
+  walls: {
+    L1_100: { q: 'If you could decide how to use $100, what would you do?' },
+    L2_job: { q: 'Mystery job: which job do you think it is, and why?' },
+    L3_hold: { q: 'One reason I held back from buying' },
+    L4_again: { q: 'Look at your Lesson 1 sticky note: would you still use $100 that way?' }
+  },
+
+  parents: {
+    intro: 'When your child asks “Can I buy it?”, you don’t have to say yes or no straight away. Try this:',
+    tips: [['Three questions before buying', 'Is it a need or a want? What will I give up? Will I still want it tomorrow?'],
+           ['A 15-minute weekly family money meeting', 'Take turns sharing “one choice I made this week” — parents too.'],
+           ['Let your child help with small decisions', 'Compare two options for a small family purchase. Let your child explain why, without judging right or wrong.']],
+    end: 'When you wait for your child to finish explaining, they learn more than money: they learn that they are trusted.',
+    books: [['《校長爸爸這樣教親子理財》（青馬文化）', 'In Chinese. Shows parents how to talk with children about money.'],
+            ['《小狗錢錢》', 'In Chinese. A story about goals and saving, suitable for upper-primary readers.'],
+            ['關顯彬《少年錢滋味》', 'In Chinese. Spending and money values through the lives of local teenagers.']]
+  }
+};
+
+// 學生的選擇一律以中文存入 Google Sheet；英文版只在畫面上翻譯
+window.FQ_VAL = {
+  '午餐': 'Lunch', '書': 'Books', '遊戲點數': 'Game credits', '送禮': 'Gifts', '儲蓄': 'Savings', '文具': 'Stationery',
+  '新款波鞋': 'New sneakers', '盲盒': 'Blind box',
+  '修': 'Repair', '換': 'Replace', '儲': 'Save', '花': 'Spend', '用緊急儲備': 'Use emergency fund',
+  '需要': 'Need', '想要': 'Want', '可以等等': 'Can wait', '可以': 'Yes', '不可以': 'No',
+  '買': 'Buy', '不買': 'Don’t buy', '等等看': 'Wait and see',
+  '已有一個': 'I already have one', '朋友不在場': 'My friends aren’t around', '24 小時後': 'After 24 hours', '沒有改變': 'No change',
+  '課頭': 'Start of lesson', '課尾': 'End of lesson', '課堂': 'In class',
+  '現在用 $20 買小物': 'Spend $20 on a small treat now', '保留 $20，儲到 $60 的目標': 'Keep $20 towards my $60 goal',
+  '最後一天半價': 'Last day at half price!', '全班都有': 'Everyone in class has one', '限量版': 'Limited edition', '你值得獎勵自己': 'You deserve a treat'
+};
