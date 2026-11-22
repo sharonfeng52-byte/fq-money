@@ -1,5 +1,5 @@
 :root{
-  --font-head:"Fredoka","Huninn","Chiron GoRound TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  --font-head:"Baloo 2","Huninn","Chiron GoRound TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   --font-body:"Nunito","Chiron GoRound TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   --navy:#1F3A68;--ink:#1F2A44;--muted:#6B7A99;--paper:#FFFDF7;--line:#c9d1de;
   --b:#1F5FA8;--bl:#E6F1FC;--bb:#5B9BD8;
@@ -129,11 +129,73 @@ textarea{min-height:70px;resize:vertical}
 #qr{background:#fff;padding:14px;border-radius:16px;display:inline-block;margin-top:10px}
 @media (max-width:520px){.hero h1{font-size:21px}.ban h1{font-size:21px}.lesson-card img{width:100px}.brow{grid-template-columns:100px 1fr 48px}}
 
-/* 標題用圓潤字體；粉圓只有一種粗細，關閉假粗體避免字形變形 */
-h1,h2,.top a,.ban .no,.lesson-card b,.tag,.btn,.gold,.opt,.tabs button,.big,.node b,.method b,.rank li b,.rank li span,.nav a,.chip{
+/* ===== 標題字體：Baloo 2（英）＋粉圓（中），貼紙式描邊 ===== */
+/* 粉圓只有一種粗細，關閉假粗體避免字形變形 */
+h1,h2,h3,.top a,.ban .no,.lesson-card b,.tag,.btn,.gold,.opt,.tabs button,.big,.node b,.method b,.rank li b,.rank li span,.nav a,.chip{
   font-family:var(--font-head);font-synthesis:none}
-h1,h2,.top a,.lesson-card b,.gold,.big{font-weight:600;letter-spacing:.02em}
-.btn,.tag,.opt,.tabs button,.ban .no,.chip,.node b,.method b{font-weight:600}
-.ban h1,.hero h1{line-height:1.3}
-.lesson-card b{font-size:18px}
-.node span,.method span{font-size:15px}
+h1,h2,.top a,.lesson-card b,.gold,.big{font-weight:800}
+.btn,.tag,.opt,.tabs button,.ban .no,.chip,.node b,.method b,.nav a{font-weight:700}
+h1,h2,.lesson-card b,.gold{text-wrap:balance}
+p,.node span,.method span{text-wrap:pretty}
+
+/* 貼紙標題：白字＋粗描邊＋柔和陰影 */
+.hero h1,.ban h1{
+  --o:var(--navy);color:#fff;letter-spacing:.03em;line-height:1.2;
+  text-shadow:
+    3px 0 0 var(--o),-3px 0 0 var(--o),0 3px 0 var(--o),0 -3px 0 var(--o),
+    2.2px 2.2px 0 var(--o),-2.2px 2.2px 0 var(--o),2.2px -2.2px 0 var(--o),-2.2px -2.2px 0 var(--o),
+    0 7px 14px rgba(31,58,104,.35)}
+.hero h1{font-size:clamp(30px,7.4vw,44px)}
+.ban h1{--o:var(--c);font-size:clamp(24px,5.6vw,36px)}
+html[lang=en] .ban h1{font-size:clamp(22px,4.9vw,32px);letter-spacing:.01em}
+.ban .no{white-space:nowrap}
+.ban img{width:38%}
+.hero p,.ban p{font-weight:700;margin-top:8px}
+
+/* 區塊標題：較大、課堂顏色 */
+.card h2{font-size:clamp(20px,4.6vw,24px);letter-spacing:.02em}
+.card h2 .n{min-width:32px;height:32px;border-radius:16px;font-size:16px;font-family:var(--font-head)}
+.lesson-card b{font-size:clamp(18px,4.4vw,21px);color:var(--c)}
+.gold{font-size:clamp(18px,4.4vw,22px);letter-spacing:.03em}
+.top a{font-size:19px;letter-spacing:.04em}
+.big{font-size:52px;line-height:1}
+.ban .no{font-size:14px;padding:3px 14px}
+::selection{background:#FFE58A;color:var(--navy)}
+
+/* ===== 顏色世界 ===== */
+:root{--sun:#FFD24D;--sunl:#FFF3C4;--sky:#4A8FD6;--pink:#F48FB1;--pinkl:#FDE8F0;--mint:#E3F6EA;--mintd:#2E9C5A}
+.l1{--cm:#A9D0F5}.l2{--cm:#BFE3A6}.l3{--cm:#FFD77A}.l4{--cm:#CDB8F2}
+body.th{background:var(--bgc)}
+body.th-home{--bgc:#EAF3FD;--top:var(--navy)}
+body.th-fp{--bgc:var(--mint);--dot:#C4EBD2;--top:var(--mintd)}
+body.th-par{--bgc:var(--pinkl);--dot:#F9CADB;--top:#C2477A}
+body.th.l1,body.th.l2,body.th.l3,body.th.l4{--bgc:var(--cl);--dot:var(--cm);--top:var(--c)}
+.top{background:var(--top,var(--navy));box-shadow:0 3px 10px rgba(31,58,104,.18)}
+
+/* 首頁：天藍歡迎橫幅、課題卡用自己的顏色、金句做深藍錨點 */
+body.th-home .hero{background:#FFE27A;border-color:#E8B10E;box-shadow:0 5px 0 #E8B10E}
+body.th-fp .hero{background:#BFEBD0;border-color:var(--mintd)}
+body.th-fp .hero h1{--o:#1E6B3E}
+body.th-par .hero{background:#F9CADB;border-color:#C2477A}
+body.th-par .hero h1{--o:#9C2E5C}
+.hero p{color:var(--navy)}
+.lesson-card{background:var(--cl);box-shadow:0 4px 0 var(--cm)}
+.lesson-card .tx small{color:#4a5672}
+body.th-home .card[style*="--gb"]{background:#F1FAEC}
+body.th-home .gold,body.th-par .gold,body.th-fp .gold{background:var(--navy);color:var(--sun);border-color:var(--navy)}
+
+/* 各堂：橫幅用中間色，白色貼紙字更突出；卡片保持白色易讀 */
+.ban{background:var(--cm);box-shadow:0 5px 0 var(--c)}
+.ban p{color:var(--ink)}
+.card{box-shadow:0 4px 0 var(--cm,#dbe4f0)}
+.node{background:var(--cl);border:2px solid var(--cm)}
+body.th.l1 .gold,body.th.l2 .gold,body.th.l3 .gold,body.th.l4 .gold{background:#fff;border-color:var(--c);color:var(--c)}
+.btn.c{box-shadow:0 4px 0 rgba(0,0,0,.25)}
+a.btn.c{background:var(--sun);color:var(--navy);box-shadow:0 4px 0 #C99A12}
+
+/* 底部導航：選中項目變成彩色膠囊 */
+.nav a{padding:4px 14px;border-radius:16px}
+.nav a.on{background:var(--top,var(--navy));color:#fff}
+.chip{box-shadow:0 2px 0 rgba(0,0,0,.15)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:520px){.ban img{width:32%}.ban .t{padding:14px 12px 14px 16px}}

@@ -202,6 +202,8 @@
   // ---------- 版面 ----------
   function shell(body, opts = {}) {
     const u = user();
+    // 每一頁有自己的顏色世界：首頁黃、各堂用該堂顏色、足跡綠、家長粉紅
+    document.body.className = 'th ' + (opts.theme || 'th-home');
     const nav = opts.noNav ? '' : `<nav class="nav">
       ${[['home', '🏠'], ['footprint', '👣'], ['parents', '👪']].map(([h, i]) =>
         `<a href="#/${h}" class="${opts.on === h ? 'on' : ''}"><i>${i}</i>${t(h)}</a>`).join('')}</nav>`;
@@ -286,7 +288,7 @@
       ${polls.map(([id, p]) => pollBlock(id, p)).join('')}
       ${walls.map(([id, w]) => wallBlock(id, w)).join('')}
       <a class="btn c full" style="display:block;text-align:center;text-decoration:none" href="#/ws/${n}">${esc(t('fill')(L.ws))}</a>
-      <div class="gold">${quote(L.gold)}</div></div>`);
+      <div class="gold">${quote(L.gold)}</div></div>`, { theme: L.cls });
     bindLesson(n);
   }
   function pollBlock(id, p) {
@@ -386,7 +388,7 @@
       <div class="err" id="wserr"></div>
       <button class="btn c full" id="send">${t('submit')}</button>
       <div id="wsok"></div>
-      <div class="gold">${quote(L.gold)}</div></div>`);
+      <div class="gold">${quote(L.gold)}</div></div>`, { theme: L.cls });
     const f = loadDraft(n);
     F.bind && F.bind(f);
     const changed = () => { $('#wserr').textContent = ''; F.calc && F.calc(); saveDraft(n, F.extra && F.extra()); };
@@ -578,7 +580,7 @@
   async function pageFootprint() {
     shell(`${hero(t('fpTitle'), C.motto)}
       <section class="card"><h2>${t('fpHope')}</h2><div class="path">${C.path.map((x, i) => `<div>${icon('p' + (i + 1))}${esc(x)}</div>`).join('')}</div></section>
-      <div id="fp"><p class="muted" style="margin-top:14px">${t('loading')}</p></div>`, { on: 'footprint' });
+      <div id="fp"><p class="muted" style="margin-top:14px">${t('loading')}</p></div>`, { on: 'footprint', theme: 'th-fp' });
     const m = await api(withUser({ action: 'mine' }));
     if (!$('#fp')) return;
     if (!m.ok) { $('#fp').innerHTML = `<p class="err">${esc(m.error)}</p>`; return; }
@@ -599,7 +601,7 @@
         <div class="row"><select id="pg" style="width:auto">${groups.map(g => `<option value="${g}">${t('groupOpt')(g)}</option>`).join('')}</select>
           <input class="in" id="pn" style="flex:1" placeholder="${esc(t('childNick'))}"><button class="btn sm" id="pgo">${t('view')}</button></div><div id="pres"></div></section>
       <section class="card"><h2>${t('books')}</h2>${P.books.map(([a, b]) => `<p style="margin-top:6px"><b>${esc(a)}</b>${COL()}${esc(b)}</p>`).join('')}</section>
-      <div class="gold">${quote(C.motto)}</div>`, { on: 'parents' });
+      <div class="gold">${quote(C.motto)}</div>`, { on: 'parents', theme: 'th-par' });
     $('#pgo').onclick = async () => {
       const nick = $('#pn').value.trim(); if (!nick) { $('#pres').innerHTML = `<p class="err">${t('needChild')}</p>`; return; }
       const m = await api({ action: 'mine', group: $('#pg').value, nick });
@@ -620,7 +622,7 @@
       <div id="qrbox" hidden><div id="qr"></div><p class="muted">${esc(location.href.split('#')[0])}</p></div>
       ${banner(n, t('tConsole')(L.title))}
       <p class="muted" style="margin-top:6px">${t('every')(CFG.REFRESH_SECONDS || 10)}${SEP()}<span id="ts"></span></p>
-      <div class="tgrid" id="tg"></div></div>`, { noNav: true, noUser: true, wide: true });
+      <div class="tgrid" id="tg"></div></div>`, { noNav: true, noUser: true, wide: true, theme: L.cls });
     $$('[data-tab]').forEach(b => { b.onclick = () => { location.hash = '#/teacher/' + b.dataset.tab; }; });
     $('#qrbtn').onclick = () => { $('#qrbox').hidden = !$('#qrbox').hidden; };
     loadQR();
