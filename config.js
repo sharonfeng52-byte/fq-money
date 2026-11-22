@@ -14,7 +14,7 @@ window.FQ_CONFIG = {
   // 留空 '' = 該堂不顯示「觀看完整課堂」按鈕。
   CLASSROOM_URLS: {
     1: '',
-    2: '',
+    2: 'https://open.maic.chat/classroom/stage-Zpv77g9Gnc?ref=share',
     3: '',
     4: ''
   }
