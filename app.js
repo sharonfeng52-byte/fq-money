@@ -729,5 +729,7 @@
   }
   window.addEventListener('hashchange', route);
   applyLang();
+  // 每次打開網站（首頁網址），都先顯示課程介紹，再按「開始上課」進入
+  if (/^(#\/?)?(home|login)?$/.test(location.hash)) history.replaceState(null, '', '#/intro');
   route();
 })();
