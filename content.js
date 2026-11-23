@@ -64,6 +64,27 @@ window.FQ = {
     L4_again: { lesson: 4, q: '再看第 1 堂的便利貼：現在你還會這樣用 $100 嗎？' }
   },
 
+  // 首頁課程介紹（未登入的訪客會先看到這一頁）
+  intro: {
+    kicker: '兒童財商系列課程｜4 堂｜11–12 歲',
+    title: '同一張鈔票，不同世界',
+    sub: '有限資源，負責任選擇',
+    whyT: '為甚麼要上這個課程？',
+    why: ['拍一下八達通、按一下手機，錢就流走了，卻好像沒有感覺。限時優惠、盲盒、網紅開箱，令「全班都有」變成壓力。',
+          '這個課程不教你「最省」，而是陪你在有限的錢和時間裡，學會看見價值、作出選擇，並為選擇負責。'],
+    howT: '每一堂怎樣上？',
+    how: [['引起動機', '先玩一個小遊戲或投票，說出自己的想法。'], ['聽一聽', '認識今堂的財商知識。'],
+          ['玩一玩', '分組動手做決定，練習技能。'], ['總結', '寫下自己的收穫，解鎖徽章。']],
+    howNote: '上課時打開這個網站，就能投票、留言和填寫線上工作紙，即時看見全班的想法。',
+    lessonsT: '四堂課，四個世界',
+    methodsT: '七個綠色理財法',
+    methodsNote: '每堂學一至三個，四堂後集齊七個徽章。',
+    pathT: '四堂之後，你會走過這六步',
+    voiceT: '設計者的話',
+    voice: '我最怕你們只學到一句「不可以花錢」。我更希望你們明白：錢是時間和努力換來的，每一個選擇都有代價，也能為明天留下可能。若四堂課後，你花錢前會多問自己一句「我真的需要嗎？」，我便覺得值得。',
+    start: '開始上課 ›', parents: '我是家長', back: '課程介紹'
+  },
+
   parents: {
     intro: '孩子問「可以買嗎？」，不必馬上答應或拒絕，可以這樣做：',
     tips: [['購買前三問', '需要還是想要？會放棄甚麼？等一天會改變嗎？'],
@@ -130,6 +151,26 @@ window.FQ_EN = {
     L2_job: { q: 'Mystery job: which job do you think it is, and why?' },
     L3_hold: { q: 'One reason I held back from buying' },
     L4_again: { q: 'Look at your Lesson 1 sticky note: would you still use $100 that way?' }
+  },
+
+  intro: {
+    kicker: 'Kids’ money series · 4 lessons · Ages 11–12',
+    title: 'One Banknote, Different Worlds',
+    sub: 'Limited resources, responsible choices',
+    whyT: 'Why take this course?',
+    why: ['Tap a card or a phone and the money is gone, and it hardly feels like anything. Flash sales, blind boxes and unboxing videos turn “everyone in class has one” into pressure.',
+          'This course won’t teach you to always spend the least. It helps you use limited money and time to see value, make choices, and own the results.'],
+    howT: 'How does each lesson work?',
+    how: [['Warm-up', 'A quick game or vote to share what you think.'], ['Listen', 'Learn the money idea of the day.'],
+          ['Play', 'Make decisions in groups and practise the skill.'], ['Wrap-up', 'Write what you learned and unlock badges.']],
+    howNote: 'Open this site in class to vote, post notes and fill in online worksheets, and see the whole class’s ideas live.',
+    lessonsT: 'Four lessons, four worlds',
+    methodsT: 'Seven green money methods',
+    methodsNote: 'Learn one to three each lesson and collect all seven badges.',
+    pathT: 'After four lessons, you’ll walk these six steps',
+    voiceT: 'From the designer',
+    voice: 'My biggest worry is that you only learn “don’t spend money”. I hope you’ll see that money comes from time and effort, that every choice has a cost, and that it can leave room for tomorrow. If you ask yourself “do I really need this?” before you spend, it was worth it.',
+    start: 'Start the course ›', parents: 'I’m a parent', back: 'About the course'
   },
 
   parents: {

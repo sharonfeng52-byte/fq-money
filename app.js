@@ -32,7 +32,7 @@
   // 畫面用的內容：英文版把 FQ_EN 的文字蓋在中文結構上
   function content() {
     if (!isEN()) return ZH;
-    const c = Object.assign({}, ZH, { title: EN.title, mainline: EN.mainline, motto: EN.motto, methods: EN.methods, path: EN.path, parents: EN.parents });
+    const c = Object.assign({}, ZH, { title: EN.title, mainline: EN.mainline, motto: EN.motto, methods: EN.methods, path: EN.path, parents: EN.parents, intro: EN.intro || ZH.intro });
     c.lessons = {}; Object.keys(ZH.lessons).forEach(n => { c.lessons[n] = Object.assign({}, ZH.lessons[n], (EN.lessons || {})[n]); });
     c.polls = {}; Object.keys(ZH.polls).forEach(k => { c.polls[k] = Object.assign({}, ZH.polls[k], (EN.polls || {})[k]); });
     c.walls = {}; Object.keys(ZH.walls).forEach(k => { c.walls[k] = Object.assign({}, ZH.walls[k], (EN.walls || {})[k]); });
@@ -251,6 +251,7 @@
       <section class="card" style="--c:var(--g);--cb:var(--gb)"><h2>${t('badges')(b.n)}</h2>${b.html}
         <p class="muted" style="margin-top:6px">${esc(t('badgeTip'))}</p></section>
       <div id="lessons">${[1, 2, 3, 4].map(n => lessonCard(n, d, true)).join('')}</div>
+      <a class="btn ghost full" style="display:block;text-align:center;text-decoration:none" href="#/intro">${esc(C.intro.back)}</a>
       <div class="gold">${quote(C.motto)}</div>`, { on: 'home' });
     const cfg = await api({ action: 'config' });
     if (cfg.ok && $('#lessons')) $('#lessons').innerHTML = [1, 2, 3, 4].map(n => lessonCard(n, d, !!cfg.open[n])).join('');
@@ -689,13 +690,37 @@
     return out.join('');
   }
 
+  // ---------- 課程介紹 ----------
+  function pageIntro() {
+    const I = C.intro;
+    shell(`<section class="hero"><div class="t"><p style="font-weight:700">${esc(I.kicker)}</p><h1>${esc(I.title)}</h1><p>${esc(I.sub)}</p></div><img src="${art('kids')}" alt=""></section>
+      <section class="card"><h2>${esc(I.whyT)}</h2>${I.why.map(x => `<p style="margin-top:6px">${esc(x)}</p>`).join('')}</section>
+      <section class="card"><h2>${esc(I.lessonsT)}</h2>
+        ${[1, 2, 3, 4].map(n => { const L = C.lessons[n]; return `<div class="${L.cls}" style="display:flex;align-items:center;gap:12px;margin-top:10px">
+          <img src="${art('m' + n)}" alt="" style="width:72px;border-radius:14px"><div><b style="color:var(--c)">${n}. ${esc(L.title)}</b><br>
+          <span class="muted">${esc(L.domain)}${SEP()}${quote(L.gold)}</span></div></div>`; }).join('')}</section>
+      <section class="card"><h2>${esc(I.howT)}</h2>
+        <div class="grid2">${I.how.map(([a, b], i) => `<div class="node" style="--c:var(--navy);--cl:#EEF4FB;--cm:#c9d1de"><b>${i + 1}. ${esc(a)}</b><span>${esc(b)}</span></div>`).join('')}</div>
+        <p class="muted" style="margin-top:10px">${esc(I.howNote)}</p></section>
+      <section class="card" style="--c:var(--g);--cb:var(--gb)"><h2>${esc(I.methodsT)}</h2>
+        <div class="badges">${[1, 2, 3, 4, 5, 6, 7].map(m => `<span title="${esc(C.methods[m].name)}">${icon('g' + m)}</span>`).join('')}</div>
+        <p class="muted" style="margin-top:6px">${[1, 2, 3, 4, 5, 6, 7].map(m => esc(C.methods[m].name)).join(isEN() ? ' · ' : '、')}</p>
+        <p class="muted">${esc(I.methodsNote)}</p></section>
+      <section class="card"><h2>${esc(I.pathT)}</h2><div class="path">${C.path.map((x, i) => `<div>${icon('p' + (i + 1))}${esc(x)}</div>`).join('')}</div></section>
+      <section class="card"><h2>${esc(I.voiceT)}</h2><p>${esc(I.voice)}</p></section>
+      <a class="btn full" style="display:block;text-align:center;text-decoration:none" href="#/${user() ? 'home' : 'login'}">${esc(I.start)}</a>
+      <a class="btn ghost full" style="display:block;text-align:center;text-decoration:none" href="#/parents">${esc(I.parents)}</a>
+      <div class="gold">${quote(C.motto)}</div>`, { noNav: !user(), on: 'intro' });
+  }
+
   // ---------- 路由 ----------
   function route() {
     if (timer) { clearInterval(timer); timer = null; }
     const [page, arg] = (location.hash.replace(/^#\/?/, '') || 'home').split('/');
     if (page === 'teacher') return pageTeacher(arg);
     if (page === 'parents') return pageParents();
-    if (!user()) return pageLogin();
+    if (page === 'intro') return pageIntro();
+    if (!user()) return page === 'login' ? pageLogin() : pageIntro();
     if (page === 'lesson') return pageLesson(+arg);
     if (page === 'ws') return pageWS(+arg);
     if (page === 'footprint') return pageFootprint();
