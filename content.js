@@ -117,25 +117,25 @@ window.FQ_EN = {
 
   lessons: {
     1: {
-      title: 'The secret of $100', domain: 'Know money', en: '認識金錢',
+      title: 'The secret of $100', domain: 'Know money', en: 'Know money',
       nodes: [['Where money comes from', 'Money doesn’t appear out of thin air.'], ['Exchange and value', 'Price isn’t the same as value; everything has a cost.'],
               ['Scarcity', 'Resources are limited, so take good care of them.'], ['Purchasing power', 'Money’s value changes, so learn to compare.']],
       gold: 'Price is what you pay; value is what you get.', ws: 'W1 · My $100'
     },
     2: {
-      title: 'What is an hour worth?', domain: 'Earn money', en: '賺取金錢',
+      title: 'What is an hour worth?', domain: 'Earn money', en: 'Earn money',
       nodes: [['Jobs and careers', 'Different jobs create different value.'], ['Time and effort', 'Time is a precious resource; effort brings rewards.'],
               ['Skills and learning', 'Grow your abilities to open up more ways to earn.'], ['Creating value', 'Become someone who adds value.']],
       gold: 'First the sweat, then the salary.', ws: 'W2 · My skill growth'
     },
     3: {
-      title: 'Skip it today, gain what?', domain: 'Save money', en: '儲蓄金錢',
+      title: 'Skip it today, gain what?', domain: 'Save money', en: 'Save money',
       nodes: [['SMART goals', 'Set a goal and save with a plan.'], ['Delayed gratification', 'Don’t rush to spend now; gain bigger choices later.'],
               ['Emergency fund', 'Keep money aside for the unexpected.'], ['Spending control', 'Cut impulse buys; spend on what truly matters.']],
       gold: 'No miracles, just steady saving.', ws: 'W3 · SMART savings plan'
     },
     4: {
-      title: 'Is a want the same as a need?', domain: 'Spend wisely', en: '消費金錢',
+      title: 'Is a want the same as a need?', domain: 'Spend wisely', en: 'Spend money',
       nodes: [['Needs vs wants', 'Ask yourself first: do I really need it?'], ['Compare and choose', 'Compare three shops and choose what fits best.'],
               ['Peers and ads', 'Don’t be swayed; think for yourself.'], ['Impulse buying', 'Stop, think, and avoid regret.']],
       gold: 'Tell your needs from your wants — it’s worth learning.', ws: 'W4 · Buy, don’t buy or wait'
