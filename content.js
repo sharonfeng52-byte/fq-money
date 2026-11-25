@@ -143,7 +143,7 @@ window.FQ_EN = {
   },
 
   polls: {
-    L3_stand: { q: 'Spend $20 on a small treat now, or keep $20 towards a $60 goal?' },
+    L3_stand: { q: 'Spend $20 on a small treat now, or keep $20 towards a $500 goal?' },
     L4_ad: { q: 'Which line tempts you most?' }
   },
   walls: {
