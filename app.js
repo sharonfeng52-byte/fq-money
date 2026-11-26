@@ -33,7 +33,7 @@
   function content() {
     if (!isEN()) return ZH;
     const c = Object.assign({}, ZH, { title: EN.title, mainline: EN.mainline, motto: EN.motto, methods: EN.methods, path: EN.path, parents: EN.parents,
-      contact: Object.assign({}, ZH.contact, EN.contact), feedback: Object.assign({}, ZH.feedback, EN.feedback) });
+      contact: Object.assign({}, ZH.contact, EN.contact), feedback: Object.assign({}, ZH.feedback, EN.feedback), intro: EN.intro || ZH.intro });
     c.lessons = {}; Object.keys(ZH.lessons).forEach(n => { c.lessons[n] = Object.assign({}, ZH.lessons[n], (EN.lessons || {})[n]); });
     c.polls = {}; Object.keys(ZH.polls).forEach(k => { c.polls[k] = Object.assign({}, ZH.polls[k], (EN.polls || {})[k]); });
     c.walls = {}; Object.keys(ZH.walls).forEach(k => { c.walls[k] = Object.assign({}, ZH.walls[k], (EN.walls || {})[k]); });
@@ -235,7 +235,7 @@
         <button class="chip" id="lang" aria-label="Language">${isEN() ? '中文' : 'EN'}</button>
         ${u && !opts.noUser ? `<button class="chip" id="who">${esc(t('group')(u.group))}${SEP()}${esc(u.nick)}</button>` : ''}</header>
       ${LIVE ? '' : `<div class="demo">${esc(t('demo'))}</div>`}
-      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}`;
+      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}${opts.wa ? `<a class="wa" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}<span>${esc(t('wa'))}</span></a>` : ''}`;
     $('#lang').onclick = () => setLang(isEN() ? 'zh' : 'en');
     const who = $('#who');
     if (who) who.onclick = () => { store.set('fq_user', null); location.hash = '#/login'; route(); };
@@ -246,6 +246,27 @@
   const waLink = () => `https://wa.me/${(C.contact || {}).whatsapp || ''}?text=${encodeURIComponent((C.contact || {}).msg || '')}`;
   const hero = (title, sub) => `<section class="hero"><div class="t"><h1>${esc(title)}</h1><p>${esc(sub)}</p></div><img src="${art('kids')}" alt=""></section>`;
 
+
+  // ---------- 課程介紹（未登入時的首頁）----------
+  function pageIntro() {
+    const I = C.intro, colors = { 1: 'var(--b)', 2: 'var(--g)', 3: 'var(--y)', 4: 'var(--p)' };
+    shell(`
+      <section class="hero"><div class="t"><span class="itag">${esc(I.tag)}</span><h1>${esc(I.title)}</h1><p>${esc(I.sub)}</p></div><img src="${art('kids')}" alt=""></section>
+      <section class="card"><h2>${esc(I.whyT)}</h2>${I.why.map(p => `<p style="margin-top:6px">${esc(p)}</p>`).join('')}</section>
+      <section class="card"><h2>${esc(I.lessonsT)}</h2>
+        ${[1, 2, 3, 4].map(n => { const L = C.lessons[n]; return `<div class="irow"><img src="${art('m' + n)}" alt=""><div><b style="color:${colors[n]}">${n}. ${esc(L.title)}</b><small>${esc(L.domain)}${SEP()}${quote(L.gold)}</small></div></div>`; }).join('')}</section>
+      <section class="card"><h2>${esc(I.howT)}</h2>
+        ${I.how.map(([a, b], i) => `<div class="istep"><b>${i + 1}. ${esc(a)}</b><span>${esc(b)}</span></div>`).join('')}
+        <p class="muted" style="margin-top:10px">${esc(I.howNote)}</p></section>
+      <section class="card" style="--c:var(--g);--cb:var(--gb);background:#F1FAEC"><h2>${esc(I.methodsT)}</h2>
+        <div class="badges">${[1, 2, 3, 4, 5, 6, 7].map(m => `<span title="${esc(C.methods[m].name)}">${icon('g' + m)}</span>`).join('')}</div>
+        <p class="muted" style="margin-top:8px">${[1, 2, 3, 4, 5, 6, 7].map(m => esc(C.methods[m].name)).join(isEN() ? ', ' : '、')}<br>${esc(I.methodsNote)}</p></section>
+      <section class="card"><h2>${esc(I.pathT)}</h2><div class="path">${C.path.map((x, i) => `<div>${icon('p' + (i + 1))}${esc(x)}</div>`).join('')}</div></section>
+      <section class="card"><h2>${esc(I.designerT)}</h2><p>${esc(I.designer)}</p></section>
+      <a class="btn full" style="display:block;text-align:center;text-decoration:none" href="#/${user() ? 'home' : 'login'}">${esc(I.start)}</a>
+      <a class="btn ghost full" style="display:block;text-align:center;text-decoration:none" href="#/parents">${esc(I.parent)}</a>
+      <div class="gold">${quote(C.motto)}</div>`, { noNav: !user(), noUser: !user(), on: 'home', wa: true });
+  }
   // ---------- 登入 ----------
   function pageLogin() {
     const groups = Array.from({ length: CFG.GROUPS || 4 }, (_, i) => i + 1);
@@ -256,7 +277,7 @@
         <div class="field"><label>${t('myNick')}</label><input class="in" id="nk" maxlength="12" placeholder="${esc(t('nickPh'))}"></div>
         <div class="err" id="er"></div>
         <button class="btn full" id="go">${t('enter')}</button>
-      </section>`, { noNav: true, noUser: true });
+      </section>`, { noNav: true, noUser: true, wa: true });
     $('#nk').oninput = () => { $('#er').textContent = ''; };
     $('#go').onclick = () => {
       const g = $('#g').value, n = $('#nk').value.replace(/^[=+\-@]+/, '').trim();
@@ -277,7 +298,8 @@
       <section class="card" style="--c:var(--g);--cb:var(--gb)"><h2>${t('badges')(b.n)}</h2>${b.html}
         <p class="muted" style="margin-top:6px">${esc(t('badgeTip'))}</p></section>
       <div id="lessons">${[1, 2, 3, 4].map(n => lessonCard(n, d, true)).join('')}</div>
-      <div class="gold">${quote(C.motto)}</div>`, { on: 'home' });
+      <a class="btn ghost full" style="display:block;text-align:center;text-decoration:none" href="#/intro">${esc(C.intro.back)}</a>
+      <div class="gold">${quote(C.motto)}</div>`, { on: 'home', wa: true });
     const cfg = await api({ action: 'config' });
     if (cfg.ok && $('#lessons')) $('#lessons').innerHTML = [1, 2, 3, 4].map(n => lessonCard(n, d, !!cfg.open[n])).join('');
     // 同步已提交紀錄（換裝置也能看到徽章）
@@ -630,7 +652,7 @@
         <a class="btn full wa-btn" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}${esc(t('waBtn'))}</a></section>
       ${fbForm(groups)}
       <section class="card"><h2>${t('books')}</h2>${P.books.map(([a, b]) => `<p style="margin-top:6px"><b>${esc(a)}</b>${COL()}${esc(b)}</p>`).join('')}</section>
-      <div class="gold">${quote(C.motto)}</div>`, { on: 'parents', theme: 'th-par' });
+      <div class="gold">${quote(C.motto)}</div>`, { on: 'parents', theme: 'th-par', wa: true });
     $('#pgo').onclick = async () => {
       const nick = $('#pn').value.trim(); if (!nick) { $('#pres').innerHTML = `<p class="err">${t('needChild')}</p>`; return; }
       const m = await api({ action: 'mine', group: $('#pg').value, nick });
@@ -795,7 +817,8 @@
     const [page, arg] = (location.hash.replace(/^#\/?/, '') || 'home').split('/');
     if (page === 'teacher') return arg === 'fb' ? pageFeedbackDash() : pageTeacher(arg);
     if (page === 'parents') return pageParents();
-    if (!user()) return pageLogin();
+    if (page === 'intro') return pageIntro();
+    if (!user()) return page === 'login' ? pageLogin() : (page === 'home' ? pageIntro() : pageLogin());
     if (page === 'lesson') return pageLesson(+arg);
     if (page === 'ws') return pageWS(+arg);
     if (page === 'footprint') return pageFootprint();

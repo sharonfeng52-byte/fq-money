@@ -74,6 +74,26 @@ window.FQ = {
             '明白錢要靠工作和努力換來', '願意和家人傾談自己的金錢選擇']
   },
 
+
+  // 首頁課程介紹（未登入時看到）
+  intro: {
+    tag: '兒童財商系列課程｜4 堂｜11–12 歲',
+    title: '同一張鈔票，不同世界',
+    sub: '有限資源，負責任選擇',
+    whyT: '為甚麼要上這個課程？',
+    why: ['拍一下八達通、按一下手機，錢就流走了，卻好像沒有感覺。限時優惠、盲盒、網紅開箱，令「全班都有」變成壓力。',
+          '這個課程不教你「最省」，而是陪你在有限的錢和時間裡，學會看見價值、作出選擇，並為選擇負責。'],
+    lessonsT: '四堂課，四個世界',
+    howT: '每一堂怎樣上？',
+    how: [['引起動機', '先玩一個小遊戲或投票，說出自己的想法。'], ['聽一聽', '認識今堂的財商知識。'], ['玩一玩', '分組動手做決定，練習技能。'], ['總結', '寫下自己的收穫，解鎖徽章。']],
+    howNote: '上課時打開這個網站，就能投票、留言和填寫線上工作紙，即時看見全班的想法。',
+    methodsT: '七個綠色理財法',
+    methodsNote: '每堂學一至三個，四堂後集齊七徽章。',
+    pathT: '四堂之後，你會走過這六步',
+    designerT: '設計者的話',
+    designer: '我最怕你們只學到一句「不可以花錢」。我更希望你們明白：錢是時間和努力換來的，每一個選擇都有代價，也能為明天留下可能。若四堂課後，你花錢前會多問自己一句「我真的需要嗎？」，我便覺得值得。',
+    start: '開始上課 ›', parent: '我是家長', back: '📖 課程介紹'
+  },
   parents: {
     intro: '孩子問「可以買嗎？」，不必馬上答應或拒絕，可以這樣做：',
     tips: [['購買前三問', '需要還是想要？會放棄甚麼？等一天會改變嗎？'],
@@ -148,6 +168,25 @@ window.FQ_EN = {
             'Understands money comes from work and effort', 'Talks with the family about their money choices']
   },
 
+
+  intro: {
+    tag: 'Children’s money course · 4 lessons · Ages 11–12',
+    title: 'One Banknote, Different Worlds',
+    sub: 'Limited resources, responsible choices',
+    whyT: 'Why take this course?',
+    why: ['A tap of an Octopus card or a phone, and money is gone without you feeling it. Flash sales, blind boxes and influencer unboxings make “everyone in class has one” feel like pressure.',
+          'This course won’t teach you to always spend the least. It helps you see value, make choices and take responsibility for them, with limited money and time.'],
+    lessonsT: 'Four lessons, four worlds',
+    howT: 'How does each lesson work?',
+    how: [['Warm-up', 'Start with a small game or vote and share your ideas.'], ['Listen', 'Learn the money ideas for the lesson.'], ['Play', 'Make decisions in groups and practise the skills.'], ['Wrap-up', 'Write down what you learned and unlock badges.']],
+    howNote: 'In class, open this website to vote, post notes and fill in online worksheets, and see the whole class’s ideas right away.',
+    methodsT: 'Seven green money methods',
+    methodsNote: 'Learn one to three in each lesson, and collect all seven badges after four lessons.',
+    pathT: 'After four lessons, you’ll walk these six steps',
+    designerT: 'From the course designer',
+    designer: 'My biggest fear is that you only learn “don’t spend money”. I hope you understand that money comes from time and effort, every choice has a cost, and it can leave choices for tomorrow. If after four lessons you ask yourself “Do I really need it?” before spending, it will all have been worth it.',
+    start: 'Start lessons ›', parent: 'I’m a parent', back: '📖 About the course'
+  },
   parents: {
     intro: 'When your child asks “Can I buy it?”, you don’t have to say yes or no straight away. Try this:',
     tips: [['Three questions before buying', 'Is it a need or a want? What will I give up? Will I still want it tomorrow?'],
