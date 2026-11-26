@@ -235,7 +235,7 @@
         <button class="chip" id="lang" aria-label="Language">${isEN() ? '中文' : 'EN'}</button>
         ${u && !opts.noUser ? `<button class="chip" id="who">${esc(t('group')(u.group))}${SEP()}${esc(u.nick)}</button>` : ''}</header>
       ${LIVE ? '' : `<div class="demo">${esc(t('demo'))}</div>`}
-      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}${opts.wa ? `<a class="wa" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}<span>${esc(t('wa'))}</span></a>` : ''}`;
+      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}`;
     $('#lang').onclick = () => setLang(isEN() ? 'zh' : 'en');
     const who = $('#who');
     if (who) who.onclick = () => { store.set('fq_user', null); location.hash = '#/login'; route(); };
@@ -256,7 +256,7 @@
         <div class="field"><label>${t('myNick')}</label><input class="in" id="nk" maxlength="12" placeholder="${esc(t('nickPh'))}"></div>
         <div class="err" id="er"></div>
         <button class="btn full" id="go">${t('enter')}</button>
-      </section>`, { noNav: true, noUser: true, wa: true });
+      </section>`, { noNav: true, noUser: true });
     $('#nk').oninput = () => { $('#er').textContent = ''; };
     $('#go').onclick = () => {
       const g = $('#g').value, n = $('#nk').value.replace(/^[=+\-@]+/, '').trim();
@@ -277,7 +277,7 @@
       <section class="card" style="--c:var(--g);--cb:var(--gb)"><h2>${t('badges')(b.n)}</h2>${b.html}
         <p class="muted" style="margin-top:6px">${esc(t('badgeTip'))}</p></section>
       <div id="lessons">${[1, 2, 3, 4].map(n => lessonCard(n, d, true)).join('')}</div>
-      <div class="gold">${quote(C.motto)}</div>`, { on: 'home', wa: true });
+      <div class="gold">${quote(C.motto)}</div>`, { on: 'home' });
     const cfg = await api({ action: 'config' });
     if (cfg.ok && $('#lessons')) $('#lessons').innerHTML = [1, 2, 3, 4].map(n => lessonCard(n, d, !!cfg.open[n])).join('');
     // 同步已提交紀錄（換裝置也能看到徽章）
@@ -630,7 +630,7 @@
         <a class="btn full wa-btn" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}${esc(t('waBtn'))}</a></section>
       ${fbForm(groups)}
       <section class="card"><h2>${t('books')}</h2>${P.books.map(([a, b]) => `<p style="margin-top:6px"><b>${esc(a)}</b>${COL()}${esc(b)}</p>`).join('')}</section>
-      <div class="gold">${quote(C.motto)}</div>`, { on: 'parents', theme: 'th-par', wa: true });
+      <div class="gold">${quote(C.motto)}</div>`, { on: 'parents', theme: 'th-par' });
     $('#pgo').onclick = async () => {
       const nick = $('#pn').value.trim(); if (!nick) { $('#pres').innerHTML = `<p class="err">${t('needChild')}</p>`; return; }
       const m = await api({ action: 'mine', group: $('#pg').value, nick });
