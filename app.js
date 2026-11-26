@@ -235,7 +235,7 @@
         <button class="chip" id="lang" aria-label="Language">${isEN() ? '中文' : 'EN'}</button>
         ${u && !opts.noUser ? `<button class="chip" id="who">${esc(t('group')(u.group))}${SEP()}${esc(u.nick)}</button>` : ''}</header>
       ${LIVE ? '' : `<div class="demo">${esc(t('demo'))}</div>`}
-      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}${opts.noWa ? '' : `<a class="wa" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}<span>${esc(t('wa'))}</span></a>`}`;
+      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}`;
     $('#lang').onclick = () => setLang(isEN() ? 'zh' : 'en');
     const who = $('#who');
     if (who) who.onclick = () => { store.set('fq_user', null); location.hash = '#/login'; route(); };
