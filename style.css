@@ -199,3 +199,25 @@ a.btn.c{background:var(--sun);color:var(--navy);box-shadow:0 4px 0 #C99A12}
 .chip{box-shadow:0 2px 0 rgba(0,0,0,.15)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media (max-width:520px){.ban img{width:32%}.ban .t{padding:14px 12px 14px 16px}}
+
+/* ===== WhatsApp 課程查詢 ===== */
+.wa{position:fixed;right:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:6;display:flex;align-items:center;gap:6px;
+  background:#25D366;color:#fff;text-decoration:none;font-family:var(--font-head);font-weight:700;font-size:15px;
+  padding:10px 16px 10px 12px;border-radius:28px;box-shadow:0 4px 0 #128C4A,0 6px 14px rgba(0,0,0,.18)}
+.wa:active{transform:translateY(2px);box-shadow:0 2px 0 #128C4A}
+.wa:focus-visible,.wa-btn:focus-visible{outline:3px solid var(--navy);outline-offset:3px}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:#25D366;color:#fff;box-shadow:0 4px 0 #128C4A}
+.wrap{padding-bottom:150px}
+@media (max-width:420px){.wa span{display:none}.wa{padding:12px;border-radius:50%}}
+
+/* ===== 家長評估表 ===== */
+.fbq{border-top:1.5px dashed var(--line);padding:10px 0 4px;margin-top:8px}
+.fbq b{display:block;font-size:15px}
+.fbrow{display:flex;align-items:center;gap:10px;margin-top:6px}
+.fbrow>span{width:64px;flex:none;font-size:14px;color:var(--muted);font-weight:700}
+.seg{display:flex;gap:6px;flex:1}
+.seg label{flex:1;max-width:56px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:flex;align-items:center;justify-content:center;height:44px;border:2px solid var(--line);border-radius:12px;background:#fff;font-weight:800;cursor:pointer;font-family:var(--font-head)}
+.seg input:checked+span{background:#C2477A;border-color:#C2477A;color:#fff}
+.seg input:focus-visible+span{outline:3px solid var(--navy);outline-offset:2px}

@@ -32,7 +32,8 @@
   // 畫面用的內容：英文版把 FQ_EN 的文字蓋在中文結構上
   function content() {
     if (!isEN()) return ZH;
-    const c = Object.assign({}, ZH, { title: EN.title, mainline: EN.mainline, motto: EN.motto, methods: EN.methods, path: EN.path, parents: EN.parents, intro: EN.intro || ZH.intro });
+    const c = Object.assign({}, ZH, { title: EN.title, mainline: EN.mainline, motto: EN.motto, methods: EN.methods, path: EN.path, parents: EN.parents,
+      contact: Object.assign({}, ZH.contact, EN.contact), feedback: Object.assign({}, ZH.feedback, EN.feedback) });
     c.lessons = {}; Object.keys(ZH.lessons).forEach(n => { c.lessons[n] = Object.assign({}, ZH.lessons[n], (EN.lessons || {})[n]); });
     c.polls = {}; Object.keys(ZH.polls).forEach(k => { c.polls[k] = Object.assign({}, ZH.polls[k], (EN.polls || {})[k]); });
     c.walls = {}; Object.keys(ZH.walls).forEach(k => { c.walls[k] = Object.assign({}, ZH.walls[k], (EN.walls || {})[k]); });
@@ -77,16 +78,24 @@
       threeQ: '我的購買前三問', qN: i => `第 ${i} 問`, rule: '四堂足跡：我的一個生活原則', rulePh: '我的生活原則',
       errDec: s => `請為「${s}」作出決定。`, errQ: '請寫好購買前三問。', errRule: '請寫下你的一個生活原則。',
       // footprint / parents
-      fpTitle: '👣 我的四堂足跡', fpHope: '最終，我們希望學生…', notYet: ws => `還沒有提交 ${ws}。`,
+      fpTitle: '我的四堂足跡', fpHope: '最終，我們希望學生…', notYet: ws => `還沒有提交 ${ws}。`,
       fp1: r => `價格是 ${r['價格是']}，價值是 ${r['價值是']}。`, fp2: r => `我想提升：${r['想提升的技能']}｜第一步：${r['第一步']}`,
       fp3: r => `目標：$${r['目標金額']} ${r['目標用途']}｜達標率 ${r['達標率']}%`, fp4: r => `生活原則：${r['生活原則']}`,
-      pTitle: '👪 家長角落', pSub: '給父母的話', pLook: '看看孩子寫了甚麼', childNick: '孩子的暱稱', view: '查看', needChild: '請輸入孩子的暱稱。',
+      pTitle: '家長角落', pSub: '給父母的話', pLook: '看看孩子寫了甚麼', childNick: '孩子的暱稱', view: '查看', needChild: '請輸入孩子的暱稱。',
       pGoal: '儲蓄目標：', pRate: r => `（達標率 ${r}%）`, pQ: '購買前三問：', pRule: '生活原則：', pNone: '暫時未有紀錄，請確認組別和暱稱。', books: '延伸讀物',
       // teacher
       tLesson: i => `第 ${i} 堂`, qr: 'QR 碼', tConsole: t => `導師控制台｜${t}`, every: s => `每 ${s} 秒自動更新`, updated: t => `最後更新 ${t}`,
       submitted: ws => `📝 ${ws} 提交`, copies: n => `${n} 份`, rank100: '💰 $100 平均排序（越長＝越被重視）', rank50: '💵 只得 $50 時的平均排序', rankN: m => `第 ${m}`,
       fixQ: '🔧 壞了的水樽：修還是換？', shopNet: '🏪 各組小店淨收入（第一輪／第二輪）', skills: '💡 想提升的技能', rates: '🐷 各組平均達標率',
-      events: '📩 事件卡決定統計', times: n => `${n} 次`, decisions: '🛍 買／不買／等等看', rules: '🌱 生活原則（匿名）', noWall: '未有留言'
+      events: '📩 事件卡決定統計', times: n => `${n} 次`, decisions: '🛍 買／不買／等等看', rules: '🌱 生活原則（匿名）', noWall: '未有留言',
+      wa: 'WhatsApp 課程查詢', waCard: '💬 課程查詢', waText: '想了解課程詳情、上課時間或報名，歡迎 WhatsApp 查詢。', waBtn: 'WhatsApp 查詢',
+      fbTitle: '📝 課後家長評估表', fbIntro: '上完四堂課後，請花約 2 分鐘告訴我們孩子有沒有改變。你的意見會用來改善課程。',
+      fbChild: '孩子的暱稱（可不填）', fbScale: '每項請分別評「上課前」和「現在」：1＝從不，3＝有時，5＝經常。',
+      fbBefore: '上課前', fbAfter: '現在', fbSat: '整體來說，你對課程的滿意度？（1＝很不滿意，5＝很滿意）', fbRec: '你會推薦這個課程給其他家長嗎？',
+      fbChange: '孩子最明顯的一個改變（可舉一個生活例子）', fbSuggest: '課程可以改善的地方', fbConsent: '我同意課程以匿名方式引用我的意見',
+      fbSend: '提交評估表', fbErr: '請為每一項選擇「上課前」和「現在」的分數，並回答滿意度及推薦。', fbOk: '謝謝你的意見！我們會用來改善課程。',
+      fbTab: '家長回饋', fbDash: '導師控制台｜家長回饋', fbCount: '📝 評估表份數', fbChangeT: '📈 孩子的改變（平均分：上課前 → 現在）',
+      fbSatT: '⭐ 整體滿意度（平均）', fbRecT: '👍 會推薦給其他家長嗎？', fbChgT: '🌱 孩子最明顯的改變', fbSugT: '🔧 改善建議', fbNone: '未有家長提交評估表'
     },
     en: {
       brand: 'One Banknote', demo: 'Demo mode: data is saved on this device only. It switches to live mode once Google Sheet is connected.',
@@ -119,15 +128,23 @@
       cheapest: (k, p) => `Cheapest: Shop ${k} ($${p}). But is the cheapest always the best value?`, changed: 'When the situation changed, when did my answer change?',
       threeQ: 'My three questions before buying', qN: i => `Question ${i}`, rule: 'My four-lesson journey: one rule I’ll live by', rulePh: 'My rule',
       errDec: s => `Make a choice for “${s}”.`, errQ: 'Write all three questions.', errRule: 'Write one rule you’ll live by.',
-      fpTitle: '👣 My four-lesson journey', fpHope: 'In the end, we hope you can…', notYet: ws => `${ws} not submitted yet.`,
+      fpTitle: 'My four-lesson journey', fpHope: 'In the end, we hope you can…', notYet: ws => `${ws} not submitted yet.`,
       fp1: r => `Price is ${r['價格是']}; value is ${r['價值是']}.`, fp2: r => `Skill to build: ${r['想提升的技能']} · First step: ${r['第一步']}`,
       fp3: r => `Goal: $${r['目標金額']} for ${r['目標用途']} · ${r['達標率']}% reached`, fp4: r => `My rule: ${r['生活原則']}`,
-      pTitle: '👪 For parents', pSub: 'A note for parents', pLook: 'See what your child wrote', childNick: 'Your child’s nickname', view: 'View', needChild: 'Enter your child’s nickname.',
+      pTitle: 'For parents', pSub: 'A note for parents', pLook: 'See what your child wrote', childNick: 'Your child’s nickname', view: 'View', needChild: 'Enter your child’s nickname.',
       pGoal: 'Savings goal: ', pRate: r => ` (${r}% reached)`, pQ: 'Three questions before buying:', pRule: 'Rule to live by: ', pNone: 'No records yet. Check the group and nickname.', books: 'Further reading',
       tLesson: i => `Lesson ${i}`, qr: 'QR code', tConsole: t => `Teacher console · ${t}`, every: s => `Refreshes every ${s} seconds`, updated: t => `Last updated ${t}`,
       submitted: ws => `📝 ${ws} submitted`, copies: n => `${n}`, rank100: '💰 Average $100 ranking (longer = valued more)', rank50: '💵 Average ranking with only $50', rankN: m => `#${m}`,
       fixQ: '🔧 Broken water bottle: repair or replace?', shopNet: '🏪 Shop net income by group (Round 1 / Round 2)', skills: '💡 Skills students want to build', rates: '🐷 Average goal reached by group',
-      events: '📩 Event card choices', times: n => `${n}`, decisions: '🛍 Buy, don’t buy or wait', rules: '🌱 Rules to live by (anonymous)', noWall: 'No notes yet'
+      events: '📩 Event card choices', times: n => `${n}`, decisions: '🛍 Buy, don’t buy or wait', rules: '🌱 Rules to live by (anonymous)', noWall: 'No notes yet',
+      wa: 'Ask on WhatsApp', waCard: '💬 Course enquiries', waText: 'For course details, class times or sign-up, message us on WhatsApp.', waBtn: 'Ask on WhatsApp',
+      fbTitle: '📝 Parent feedback form', fbIntro: 'After the four lessons, take about 2 minutes to tell us whether your child has changed. We use your answers to improve the course.',
+      fbChild: 'Your child’s nickname (optional)', fbScale: 'Rate each item twice, for before the course and now: 1 = never, 3 = sometimes, 5 = often.',
+      fbBefore: 'Before', fbAfter: 'Now', fbSat: 'Overall, how satisfied are you with the course? (1 = very unsatisfied, 5 = very satisfied)', fbRec: 'Would you recommend this course to other parents?',
+      fbChange: 'The clearest change in your child (an everyday example helps)', fbSuggest: 'What could the course do better?', fbConsent: 'You may quote my comments anonymously',
+      fbSend: 'Send feedback', fbErr: 'Choose a before and now score for every item, and answer the satisfaction and recommend questions.', fbOk: 'Thank you. Your feedback will help us improve the course.',
+      fbTab: 'Parent feedback', fbDash: 'Teacher console · Parent feedback', fbCount: '📝 Forms received', fbChangeT: '📈 Change in children (average: before → now)',
+      fbSatT: '⭐ Overall satisfaction (average)', fbRecT: '👍 Would recommend to other parents?', fbChgT: '🌱 Clearest changes', fbSugT: '🔧 Suggestions', fbNone: 'No parent feedback yet'
     }
   };
   const t = k => T[LANG][k];
@@ -167,6 +184,12 @@
           const L = String(q.lesson);
           return { ok: true, rows: d['W' + L].map(this.strip), votes: d.votes.filter(x => String(x['堂']) === L).map(this.strip), walls: d.walls.filter(w => String(w['堂']) === L).map(this.strip) };
         }
+        case 'feedback': {
+          d.fb = d.fb || [];
+          d.fb.push(Object.assign({ '時間': now, '孩子組別': q.group || '', '孩子暱稱': q.nick || '' }, q.data));
+          this.save(d); return { ok: true };
+        }
+        case 'feedbackList': return { ok: true, rows: (d.fb || []).map(r => { const o = Object.assign({}, r); delete o['孩子暱稱']; return o; }) };
         case 'mine': {
           const out = { ok: true, walls: d.walls.filter(mine), votes: d.votes.filter(mine) };
           ['W1', 'W2', 'W3', 'W4'].forEach(k => { out[k] = d[k].find(mine) || null; });
@@ -182,7 +205,7 @@
     if (!LIVE) return Demo.handle(q);
     try {
       let r;
-      if (['config', 'summary', 'mine'].includes(q.action)) {
+      if (['config', 'summary', 'mine', 'feedbackList'].includes(q.action)) {
         const u = new URL(CFG.SCRIPT_URL);
         Object.keys(q).forEach(k => u.searchParams.set(k, q[k]));
         r = await fetch(u.toString());
@@ -212,12 +235,15 @@
         <button class="chip" id="lang" aria-label="Language">${isEN() ? '中文' : 'EN'}</button>
         ${u && !opts.noUser ? `<button class="chip" id="who">${esc(t('group')(u.group))}${SEP()}${esc(u.nick)}</button>` : ''}</header>
       ${LIVE ? '' : `<div class="demo">${esc(t('demo'))}</div>`}
-      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}`;
+      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}${opts.noWa ? '' : `<a class="wa" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}<span>${esc(t('wa'))}</span></a>`}`;
     $('#lang').onclick = () => setLang(isEN() ? 'zh' : 'en');
     const who = $('#who');
     if (who) who.onclick = () => { store.set('fq_user', null); location.hash = '#/login'; route(); };
     window.scrollTo(0, 0);
   }
+  // WhatsApp 課程查詢
+  const WA_ICON = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>';
+  const waLink = () => `https://wa.me/${(C.contact || {}).whatsapp || ''}?text=${encodeURIComponent((C.contact || {}).msg || '')}`;
   const hero = (title, sub) => `<section class="hero"><div class="t"><h1>${esc(title)}</h1><p>${esc(sub)}</p></div><img src="${art('kids')}" alt=""></section>`;
 
   // ---------- 登入 ----------
@@ -251,7 +277,6 @@
       <section class="card" style="--c:var(--g);--cb:var(--gb)"><h2>${t('badges')(b.n)}</h2>${b.html}
         <p class="muted" style="margin-top:6px">${esc(t('badgeTip'))}</p></section>
       <div id="lessons">${[1, 2, 3, 4].map(n => lessonCard(n, d, true)).join('')}</div>
-      <a class="btn ghost full" style="display:block;text-align:center;text-decoration:none" href="#/intro">${esc(C.intro.back)}</a>
       <div class="gold">${quote(C.motto)}</div>`, { on: 'home' });
     const cfg = await api({ action: 'config' });
     if (cfg.ok && $('#lessons')) $('#lessons').innerHTML = [1, 2, 3, 4].map(n => lessonCard(n, d, !!cfg.open[n])).join('');
@@ -279,12 +304,8 @@
     const L = C.lessons[n]; if (!L) return pageHome();
     const polls = Object.entries(C.polls).filter(([, p]) => p.lesson === n);
     const walls = Object.entries(C.walls).filter(([, w]) => w.lesson === n);
-    const classUrl = ((window.FQ_CONFIG || {}).CLASSROOM_URLS || {})[n] || '';
     shell(`<div class="${L.cls}">
       ${banner(n)}
-      ${/^https:\/\//.test(classUrl) ? `<section class="card"><h2>${isEN() ? '🎬 Watch the full lesson' : '🎬 觀看完整課堂'}</h2>
-        <p class="muted">${isEN() ? 'An AI-led interactive version of this lesson. Opens in a new tab.' : '由 AI 老師帶領的互動版本，會在新分頁開啟。'}</p>
-        <a class="btn c full" style="display:block;text-align:center;text-decoration:none" href="${esc(classUrl)}" target="_blank" rel="noopener">${isEN() ? 'Start the lesson ›' : '開始上課 ›'}</a></section>` : ''}
       <section class="card"><h2><span class="n">1</span>${t('nodes')}</h2>
         <div class="grid2">${L.nodes.map(([a, b]) => `<div class="node"><b>${esc(a)}</b><span>${esc(b)}</span></div>`).join('')}</div></section>
       <section class="card"><h2><span class="n">2</span>${t('methods')}</h2>
@@ -605,6 +626,9 @@
       <section class="card"><h2>${t('pLook')}</h2>
         <div class="row"><select id="pg" style="width:auto">${groups.map(g => `<option value="${g}">${t('groupOpt')(g)}</option>`).join('')}</select>
           <input class="in" id="pn" style="flex:1" placeholder="${esc(t('childNick'))}"><button class="btn sm" id="pgo">${t('view')}</button></div><div id="pres"></div></section>
+      <section class="card"><h2>${t('waCard')}</h2><p>${esc(t('waText'))}</p>
+        <a class="btn full wa-btn" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}${esc(t('waBtn'))}</a></section>
+      ${fbForm(groups)}
       <section class="card"><h2>${t('books')}</h2>${P.books.map(([a, b]) => `<p style="margin-top:6px"><b>${esc(a)}</b>${COL()}${esc(b)}</p>`).join('')}</section>
       <div class="gold">${quote(C.motto)}</div>`, { on: 'parents', theme: 'th-par' });
     $('#pgo').onclick = async () => {
@@ -615,6 +639,81 @@
         ${w4 ? `<p><b>${t('pQ')}</b></p><ol style="margin-left:20px">${[1, 2, 3].map(i => `<li>${esc(w4['購買前三問' + i])}</li>`).join('')}</ol><p><b>${t('pRule')}</b>${esc(w4['生活原則'])}</p>` : ''}`
         : `<p class="muted" style="margin-top:10px">${t('pNone')}</p>`;
     };
+    bindFb();
+  }
+
+  // ---------- 家長課後評估表 ----------
+  function fbForm(groups) {
+    const seg = name => `<div class="seg">${[1, 2, 3, 4, 5].map(n => `<label><input type="radio" name="${name}" value="${n}"><span>${n}</span></label>`).join('')}</div>`;
+    return `<section class="card" id="fbcard"><h2>${t('fbTitle')}</h2><p class="muted">${esc(t('fbIntro'))}</p>
+      <div class="row field"><select id="fg" style="width:auto"><option value="">${t('choose')}</option>${groups.map(g => `<option value="${g}">${t('groupOpt')(g)}</option>`).join('')}</select>
+        <input class="in" id="fn" style="flex:1" maxlength="20" placeholder="${esc(t('fbChild'))}"></div>
+      <p class="muted" style="margin-top:10px">${esc(t('fbScale'))}</p>
+      ${C.feedback.items.map((it, i) => `<div class="fbq"><b>${i + 1}. ${esc(it)}</b>
+        <div class="fbrow"><span>${t('fbBefore')}</span>${seg('b' + i)}</div><div class="fbrow"><span>${t('fbAfter')}</span>${seg('a' + i)}</div></div>`).join('')}
+      <div class="fbq"><b>${esc(t('fbSat'))}</b><div class="fbrow"><span></span>${seg('sat')}</div></div>
+      <div class="field"><label>${esc(t('fbRec'))}</label><div>${['會', '可能會', '不會'].map(o => `<label class="pill"><input type="radio" name="rec" value="${o}">${esc(v(o))}</label>`).join('')}</div></div>
+      <div class="field"><label>${esc(t('fbChange'))}</label><textarea id="fchg" maxlength="300"></textarea></div>
+      <div class="field"><label>${esc(t('fbSuggest'))}</label><textarea id="fsug" maxlength="300"></textarea></div>
+      <label class="pill" style="margin-top:10px"><input type="checkbox" id="fok">${esc(t('fbConsent'))}</label>
+      <div class="err" id="ferr"></div><button class="btn full" id="fsend">${t('fbSend')}</button><div id="fdone"></div></section>`;
+  }
+  function bindFb() {
+    const card = $('#fbcard'); if (!card) return;
+    const pick = n => (card.querySelector(`input[name="${n}"]:checked`) || {}).value;
+    card.addEventListener('change', () => { $('#ferr').textContent = ''; });
+    $('#fsend').onclick = async () => {
+      const keys = ZH.feedback.keys, data = {};
+      for (let i = 0; i < keys.length; i++) {
+        const b = pick('b' + i), a = pick('a' + i);
+        if (!b || !a) { $('#ferr').textContent = t('fbErr'); return; }
+        data[keys[i] + '_課前'] = +b; data[keys[i] + '_現在'] = +a; data[keys[i] + '_改變'] = a - b;
+      }
+      if (!pick('sat') || !pick('rec')) { $('#ferr').textContent = t('fbErr'); return; }
+      Object.assign(data, { '滿意度': +pick('sat'), '會推薦': pick('rec'), '最明顯改變': $('#fchg').value.trim(), '改善建議': $('#fsug').value.trim(), '同意匿名引用': $('#fok').checked ? '同意' : '不同意' });
+      $('#fsend').disabled = true;
+      const r = await api({ action: 'feedback', group: $('#fg').value, nick: $('#fn').value.trim(), data });
+      $('#fsend').disabled = false;
+      if (!r.ok) { $('#ferr').textContent = r.error || t('subFail'); return; }
+      $('#fsend').hidden = true;
+      $('#fdone').innerHTML = `<div class="okmsg">${esc(t('fbOk'))}</div>`;
+    };
+  }
+
+  // ---------- 導師大屏：家長回饋 ----------
+  function pageFeedbackDash() {
+    shell(`<div style="--c:#C2477A;--cl:#FDE8F0;--cb:#F4A6C3;--cm:#F9CADB">
+      <div class="tabs">${[1, 2, 3, 4].map(i => `<button data-tab="${i}">${t('tLesson')(i)}</button>`).join('')}<button class="on" data-tab="fb">${t('fbTab')}</button></div>
+      ${hero(t('fbDash'), t('fbTab'))}
+      <p class="muted" style="margin-top:6px">${t('every')(CFG.REFRESH_SECONDS || 10)}${SEP()}<span id="ts"></span></p>
+      <div class="tgrid" id="tg"></div></div>`, { noNav: true, noUser: true, wide: true, theme: 'th-par', noWa: true });
+    $$('[data-tab]').forEach(b => { b.onclick = () => { location.hash = '#/teacher/' + b.dataset.tab; }; });
+    const tick = async () => {
+      const s = await api({ action: 'feedbackList' });
+      if (!$('#tg')) return;
+      if (!s.ok) { $('#tg').innerHTML = `<p class="err">${esc(s.error)}</p>`; return; }
+      $('#ts').textContent = t('updated')(new Date().toLocaleTimeString());
+      $('#tg').innerHTML = fbPanels(s.rows);
+    };
+    tick(); timer = setInterval(tick, (CFG.REFRESH_SECONDS || 10) * 1000);
+  }
+  function fbPanels(rows) {
+    if (!rows.length) return box(t('fbCount'), `<div class="big">0</div><p class="muted">${t('fbNone')}</p>`);
+    const out = [];
+    out.push(box(t('fbCount'), `<div class="big">${rows.length}</div>`));
+    out.push(box(t('fbChangeT'), ZH.feedback.keys.map((k, i) => {
+      const b = avg(rows.map(r => num(r[k + '_課前']))), a = avg(rows.map(r => num(r[k + '_現在'])));
+      const d = a - b;
+      return `<p style="margin-top:8px;font-weight:700">${i + 1}. ${esc(C.feedback.items[i])}</p>` +
+        bars([[t('fbBefore'), b, b.toFixed(1)], [t('fbAfter'), a, a.toFixed(1)]], 5) +
+        `<p class="muted">${d >= 0 ? '+' : ''}${d.toFixed(1)}</p>`;
+    }).join('')));
+    const sat = avg(rows.map(r => num(r['滿意度'])));
+    out.push(box(t('fbSatT'), `<div class="big">${sat.toFixed(1)}<span class="muted" style="font-size:18px"> / 5</span></div>`));
+    out.push(box(t('fbRecT'), bars(['會', '可能會', '不會'].map(o => { const c = rows.filter(r => r['會推薦'] === o).length; return [v(o), c, t('nPeople')(c)]; }), Math.max(1, rows.length))));
+    out.push(box(t('fbChgT'), notes(rows.filter(r => r['最明顯改變']).map(r => ({ '內容': r['最明顯改變'], '組別': r['孩子組別'] })))));
+    out.push(box(t('fbSugT'), notes(rows.filter(r => r['改善建議']).map(r => ({ '內容': r['改善建議'], '組別': r['孩子組別'] })))));
+    return out.join('');
   }
 
   // ---------- 導師大屏 ----------
@@ -623,11 +722,11 @@
     const L = C.lessons[n];
     shell(`<div class="${L.cls}">
       <div class="tabs">${[1, 2, 3, 4].map(i => `<button class="${i === n ? 'on' : ''}" data-tab="${i}">${t('tLesson')(i)}</button>`).join('')}
-        <button id="qrbtn">${t('qr')}</button></div>
+        <button data-tab="fb">${t('fbTab')}</button><button id="qrbtn">${t('qr')}</button></div>
       <div id="qrbox" hidden><div id="qr"></div><p class="muted">${esc(location.href.split('#')[0])}</p></div>
       ${banner(n, t('tConsole')(L.title))}
       <p class="muted" style="margin-top:6px">${t('every')(CFG.REFRESH_SECONDS || 10)}${SEP()}<span id="ts"></span></p>
-      <div class="tgrid" id="tg"></div></div>`, { noNav: true, noUser: true, wide: true, theme: L.cls });
+      <div class="tgrid" id="tg"></div></div>`, { noNav: true, noUser: true, wide: true, theme: L.cls, noWa: true });
     $$('[data-tab]').forEach(b => { b.onclick = () => { location.hash = '#/teacher/' + b.dataset.tab; }; });
     $('#qrbtn').onclick = () => { $('#qrbox').hidden = !$('#qrbox').hidden; };
     loadQR();
@@ -690,37 +789,13 @@
     return out.join('');
   }
 
-  // ---------- 課程介紹 ----------
-  function pageIntro() {
-    const I = C.intro;
-    shell(`<section class="hero"><div class="t"><p style="font-weight:700">${esc(I.kicker)}</p><h1>${esc(I.title)}</h1><p>${esc(I.sub)}</p></div><img src="${art('kids')}" alt=""></section>
-      <section class="card"><h2>${esc(I.whyT)}</h2>${I.why.map(x => `<p style="margin-top:6px">${esc(x)}</p>`).join('')}</section>
-      <section class="card"><h2>${esc(I.lessonsT)}</h2>
-        ${[1, 2, 3, 4].map(n => { const L = C.lessons[n]; return `<div class="${L.cls}" style="display:flex;align-items:center;gap:12px;margin-top:10px">
-          <img src="${art('m' + n)}" alt="" style="width:72px;border-radius:14px"><div><b style="color:var(--c)">${n}. ${esc(L.title)}</b><br>
-          <span class="muted">${esc(L.domain)}${SEP()}${quote(L.gold)}</span></div></div>`; }).join('')}</section>
-      <section class="card"><h2>${esc(I.howT)}</h2>
-        <div class="grid2">${I.how.map(([a, b], i) => `<div class="node" style="--c:var(--navy);--cl:#EEF4FB;--cm:#c9d1de"><b>${i + 1}. ${esc(a)}</b><span>${esc(b)}</span></div>`).join('')}</div>
-        <p class="muted" style="margin-top:10px">${esc(I.howNote)}</p></section>
-      <section class="card" style="--c:var(--g);--cb:var(--gb)"><h2>${esc(I.methodsT)}</h2>
-        <div class="badges">${[1, 2, 3, 4, 5, 6, 7].map(m => `<span title="${esc(C.methods[m].name)}">${icon('g' + m)}</span>`).join('')}</div>
-        <p class="muted" style="margin-top:6px">${[1, 2, 3, 4, 5, 6, 7].map(m => esc(C.methods[m].name)).join(isEN() ? ' · ' : '、')}</p>
-        <p class="muted">${esc(I.methodsNote)}</p></section>
-      <section class="card"><h2>${esc(I.pathT)}</h2><div class="path">${C.path.map((x, i) => `<div>${icon('p' + (i + 1))}${esc(x)}</div>`).join('')}</div></section>
-      <section class="card"><h2>${esc(I.voiceT)}</h2><p>${esc(I.voice)}</p></section>
-      <a class="btn full" style="display:block;text-align:center;text-decoration:none" href="#/${user() ? 'home' : 'login'}">${esc(I.start)}</a>
-      <a class="btn ghost full" style="display:block;text-align:center;text-decoration:none" href="#/parents">${esc(I.parents)}</a>
-      <div class="gold">${quote(C.motto)}</div>`, { noNav: !user(), on: 'intro' });
-  }
-
   // ---------- 路由 ----------
   function route() {
     if (timer) { clearInterval(timer); timer = null; }
     const [page, arg] = (location.hash.replace(/^#\/?/, '') || 'home').split('/');
-    if (page === 'teacher') return pageTeacher(arg);
+    if (page === 'teacher') return arg === 'fb' ? pageFeedbackDash() : pageTeacher(arg);
     if (page === 'parents') return pageParents();
-    if (page === 'intro') return pageIntro();
-    if (!user()) return page === 'login' ? pageLogin() : pageIntro();
+    if (!user()) return pageLogin();
     if (page === 'lesson') return pageLesson(+arg);
     if (page === 'ws') return pageWS(+arg);
     if (page === 'footprint') return pageFootprint();
@@ -729,7 +804,5 @@
   }
   window.addEventListener('hashchange', route);
   applyLang();
-  // 每次打開網站（首頁網址），都先顯示課程介紹，再按「開始上課」進入
-  if (/^(#\/?)?(home|login)?$/.test(location.hash)) history.replaceState(null, '', '#/intro');
   route();
 })();

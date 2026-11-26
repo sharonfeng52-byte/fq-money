@@ -50,8 +50,8 @@ window.FQ = {
 
   // 課堂投票
   polls: {
-    L3_stand: { lesson: 3, q: '現在用 $20 買小物，還是保留 $20，儲到 $500 的目標？',
-                options: ['現在用 $20 買小物', '保留 $20，儲到 $500 的目標'], phases: ['課頭', '課尾'] },
+    L3_stand: { lesson: 3, q: '現在用 $20 買小物，還是保留 $20，儲到 $60 的目標？',
+                options: ['現在用 $20 買小物', '保留 $20，儲到 $60 的目標'], phases: ['課頭', '課尾'] },
     L4_ad: { lesson: 4, q: '哪一句最容易令你心動？',
              options: ['最後一天半價', '全班都有', '限量版', '你值得獎勵自己'], phases: ['課堂'] }
   },
@@ -64,25 +64,14 @@ window.FQ = {
     L4_again: { lesson: 4, q: '再看第 1 堂的便利貼：現在你還會這樣用 $100 嗎？' }
   },
 
-  // 首頁課程介紹（未登入的訪客會先看到這一頁）
-  intro: {
-    kicker: '兒童財商系列課程｜4 堂｜11–12 歲',
-    title: '同一張鈔票，不同世界',
-    sub: '有限資源，負責任選擇',
-    whyT: '為甚麼要上這個課程？',
-    why: ['拍一下八達通、按一下手機，錢就流走了，卻好像沒有感覺。限時優惠、盲盒、網紅開箱，令「全班都有」變成壓力。',
-          '這個課程不教你「最省」，而是陪你在有限的錢和時間裡，學會看見價值、作出選擇，並為選擇負責。'],
-    howT: '每一堂怎樣上？',
-    how: [['引起動機', '先玩一個小遊戲或投票，說出自己的想法。'], ['聽一聽', '認識今堂的財商知識。'],
-          ['玩一玩', '分組動手做決定，練習技能。'], ['總結', '寫下自己的收穫，解鎖徽章。']],
-    howNote: '上課時打開這個網站，就能投票、留言和填寫線上工作紙，即時看見全班的想法。',
-    lessonsT: '四堂課，四個世界',
-    methodsT: '七個綠色理財法',
-    methodsNote: '每堂學一至三個，四堂後集齊七個徽章。',
-    pathT: '四堂之後，你會走過這六步',
-    voiceT: '設計者的話',
-    voice: '我最怕你們只學到一句「不可以花錢」。我更希望你們明白：錢是時間和努力換來的，每一個選擇都有代價，也能為明天留下可能。若四堂課後，你花錢前會多問自己一句「我真的需要嗎？」，我便覺得值得。',
-    start: '開始上課 ›', parents: '我是家長', back: '課程介紹'
+  // 課程查詢 WhatsApp（號碼只寫數字，含區號 852）
+  contact: { whatsapp: '85260517752', msg: '你好，我想查詢《同一張鈔票，不同世界》兒童財商課程。' },
+
+  // 家長課後評估表：每項請家長分別評「上課前」和「上完課後」（1–5 分）
+  feedback: {
+    keys: ['先想需要想要', '訂目標儲錢', '珍惜已有', '明白勞動', '和家人傾談'],
+    items: ['買東西前，會先想「需要還是想要」', '會為想要的東西訂目標、儲錢', '珍惜已有的東西，願意用到盡或先修理',
+            '明白錢要靠工作和努力換來', '願意和家人傾談自己的金錢選擇']
   },
 
   parents: {
@@ -117,25 +106,25 @@ window.FQ_EN = {
 
   lessons: {
     1: {
-      title: 'The secret of $100', domain: 'Know money', en: 'Know money',
+      title: 'The secret of $100', domain: 'Know money', en: '認識金錢',
       nodes: [['Where money comes from', 'Money doesn’t appear out of thin air.'], ['Exchange and value', 'Price isn’t the same as value; everything has a cost.'],
               ['Scarcity', 'Resources are limited, so take good care of them.'], ['Purchasing power', 'Money’s value changes, so learn to compare.']],
       gold: 'Price is what you pay; value is what you get.', ws: 'W1 · My $100'
     },
     2: {
-      title: 'What is an hour worth?', domain: 'Earn money', en: 'Earn money',
+      title: 'What is an hour worth?', domain: 'Earn money', en: '賺取金錢',
       nodes: [['Jobs and careers', 'Different jobs create different value.'], ['Time and effort', 'Time is a precious resource; effort brings rewards.'],
               ['Skills and learning', 'Grow your abilities to open up more ways to earn.'], ['Creating value', 'Become someone who adds value.']],
       gold: 'First the sweat, then the salary.', ws: 'W2 · My skill growth'
     },
     3: {
-      title: 'Skip it today, gain what?', domain: 'Save money', en: 'Save money',
+      title: 'Skip it today, gain what?', domain: 'Save money', en: '儲蓄金錢',
       nodes: [['SMART goals', 'Set a goal and save with a plan.'], ['Delayed gratification', 'Don’t rush to spend now; gain bigger choices later.'],
               ['Emergency fund', 'Keep money aside for the unexpected.'], ['Spending control', 'Cut impulse buys; spend on what truly matters.']],
       gold: 'No miracles, just steady saving.', ws: 'W3 · SMART savings plan'
     },
     4: {
-      title: 'Is a want the same as a need?', domain: 'Spend wisely', en: 'Spend money',
+      title: 'Is a want the same as a need?', domain: 'Spend wisely', en: '消費金錢',
       nodes: [['Needs vs wants', 'Ask yourself first: do I really need it?'], ['Compare and choose', 'Compare three shops and choose what fits best.'],
               ['Peers and ads', 'Don’t be swayed; think for yourself.'], ['Impulse buying', 'Stop, think, and avoid regret.']],
       gold: 'Tell your needs from your wants — it’s worth learning.', ws: 'W4 · Buy, don’t buy or wait'
@@ -143,7 +132,7 @@ window.FQ_EN = {
   },
 
   polls: {
-    L3_stand: { q: 'Spend $20 on a small treat now, or keep $20 towards a $500 goal?' },
+    L3_stand: { q: 'Spend $20 on a small treat now, or keep $20 towards a $60 goal?' },
     L4_ad: { q: 'Which line tempts you most?' }
   },
   walls: {
@@ -153,24 +142,10 @@ window.FQ_EN = {
     L4_again: { q: 'Look at your Lesson 1 sticky note: would you still use $100 that way?' }
   },
 
-  intro: {
-    kicker: 'Kids’ money series · 4 lessons · Ages 11–12',
-    title: 'One Banknote, Different Worlds',
-    sub: 'Limited resources, responsible choices',
-    whyT: 'Why take this course?',
-    why: ['Tap a card or a phone and the money is gone, and it hardly feels like anything. Flash sales, blind boxes and unboxing videos turn “everyone in class has one” into pressure.',
-          'This course won’t teach you to always spend the least. It helps you use limited money and time to see value, make choices, and own the results.'],
-    howT: 'How does each lesson work?',
-    how: [['Warm-up', 'A quick game or vote to share what you think.'], ['Listen', 'Learn the money idea of the day.'],
-          ['Play', 'Make decisions in groups and practise the skill.'], ['Wrap-up', 'Write what you learned and unlock badges.']],
-    howNote: 'Open this site in class to vote, post notes and fill in online worksheets, and see the whole class’s ideas live.',
-    lessonsT: 'Four lessons, four worlds',
-    methodsT: 'Seven green money methods',
-    methodsNote: 'Learn one to three each lesson and collect all seven badges.',
-    pathT: 'After four lessons, you’ll walk these six steps',
-    voiceT: 'From the designer',
-    voice: 'My biggest worry is that you only learn “don’t spend money”. I hope you’ll see that money comes from time and effort, that every choice has a cost, and that it can leave room for tomorrow. If you ask yourself “do I really need this?” before you spend, it was worth it.',
-    start: 'Start the course ›', parents: 'I’m a parent', back: 'About the course'
+  contact: { msg: 'Hi, I’d like to ask about the “One Banknote, Different Worlds” children’s money course.' },
+  feedback: {
+    items: ['Thinks “need or want?” before buying', 'Sets goals and saves for things they want', 'Takes care of their things, uses them up or repairs first',
+            'Understands money comes from work and effort', 'Talks with the family about their money choices']
   },
 
   parents: {
@@ -179,9 +154,9 @@ window.FQ_EN = {
            ['A 15-minute weekly family money meeting', 'Take turns sharing “one choice I made this week” — parents too.'],
            ['Let your child help with small decisions', 'Compare two options for a small family purchase. Let your child explain why, without judging right or wrong.']],
     end: 'When you wait for your child to finish explaining, they learn more than money: they learn that they are trusted.',
-    books: [['How a Principal Dad Teaches Kids About Money 《校長爸爸這樣教親子理財》（青馬文化）', 'In Chinese. Shows parents how to talk with children about money.'],
-            ['A Dog Named Money 《小狗錢錢》', 'Chinese edition. A story about goals and saving, suitable for upper-primary readers.'],
-            ['The Taste of Money for Teens 關顯彬《少年錢滋味》', 'In Chinese. Spending and money values through the lives of local teenagers.']]
+    books: [['《校長爸爸這樣教親子理財》（青馬文化）', 'In Chinese. Shows parents how to talk with children about money.'],
+            ['《小狗錢錢》', 'In Chinese. A story about goals and saving, suitable for upper-primary readers.'],
+            ['關顯彬《少年錢滋味》', 'In Chinese. Spending and money values through the lives of local teenagers.']]
   }
 };
 
@@ -194,6 +169,7 @@ window.FQ_VAL = {
   '買': 'Buy', '不買': 'Don’t buy', '等等看': 'Wait and see',
   '已有一個': 'I already have one', '朋友不在場': 'My friends aren’t around', '24 小時後': 'After 24 hours', '沒有改變': 'No change',
   '課頭': 'Start of lesson', '課尾': 'End of lesson', '課堂': 'In class',
-  '現在用 $20 買小物': 'Spend $20 on a small treat now', '保留 $20，儲到 $500 的目標': 'Keep $20 towards my $500 goal',
+  '現在用 $20 買小物': 'Spend $20 on a small treat now', '保留 $20，儲到 $60 的目標': 'Keep $20 towards my $60 goal',
+  '會': 'Yes', '可能會': 'Maybe', '不會': 'No',
   '最後一天半價': 'Last day at half price!', '全班都有': 'Everyone in class has one', '限量版': 'Limited edition', '你值得獎勵自己': 'You deserve a treat'
 };
