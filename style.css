@@ -403,3 +403,32 @@ body:not(.th-x) main.wrap{padding-bottom:20px}
 .foot-site{padding-bottom:70px}
 @media (prefers-reduced-motion:reduce){.scene .cloud,.scene .sun,.scene .balloon{animation:none}}
 @media (max-width:600px){.scene .balloon{display:none}.scene-kids{bottom:30px}}
+
+/* ===== 工作紙＋家長角落：小型插畫場景、點點標題 ===== */
+.mini{position:relative;margin:14px 0 4px;height:clamp(200px,40vw,240px);border-radius:26px;overflow:hidden;
+  background:linear-gradient(var(--sky1,#A8D8F8),var(--sky2,#E3F2FD) 75%);box-shadow:0 6px 0 var(--cm,#A9D0F5)}
+.mini-svg{position:absolute;inset:0;width:100%;height:100%}
+.mini .cloud{animation:drift 40s linear infinite}.mini .c2{animation-duration:55s;animation-delay:-24s}
+.mini .hb{fill:var(--hb,#B9E3A1)}.mini .hf{fill:var(--hf,#8FCF6E)}.mini .tr polygon{fill:var(--tr,#5DAA45)}
+.mini-t{position:relative;z-index:2;padding:16px 18px;max-width:62%}
+.mini-tag{display:inline-block;background:var(--c,var(--navy));color:#fff;border-radius:14px;padding:2px 12px;font-size:13px;font-weight:700}
+.mini h1{font-family:var(--font-head);font-weight:800;color:#fff;font-size:clamp(24px,6vw,34px);line-height:1.18;margin-top:8px;text-wrap:balance;
+  --o:var(--c,var(--navy));text-shadow:2.5px 0 0 var(--o),-2.5px 0 0 var(--o),0 2.5px 0 var(--o),0 -2.5px 0 var(--o),1.8px 1.8px 0 var(--o),-1.8px 1.8px 0 var(--o),1.8px -1.8px 0 var(--o),-1.8px -1.8px 0 var(--o),0 6px 12px rgba(31,58,104,.25);
+  animation:popTitle .7s var(--ease-bounce) both}
+.mini p{font-weight:800;color:var(--navy);font-size:14px;margin-top:4px;animation:fadeUp .6s var(--ease-out) .2s both}
+.mini-pic{position:absolute;z-index:1;right:16px;bottom:14px;width:clamp(120px,32vw,170px);aspect-ratio:1;object-fit:cover;object-position:center 30%;border-radius:50%;
+  border:5px solid #fff;box-shadow:0 8px 18px rgba(31,58,104,.22);animation:riseIn .8s var(--ease-out) .1s both, bob 4.5s ease-in-out 1s infinite}
+/* 各堂色系的天空與山丘 */
+.l1 .mini{--sky1:#9FD0F7;--sky2:#E1F0FD}
+.l2 .mini{--sky1:#BFE8F6;--sky2:#EEF9E6;--hb:#CBEBB0;--hf:#8FCF6E}
+.l3 .mini{--sky1:#FFD99A;--sky2:#FFF3DA;--hb:#F7D18A;--hf:#E9B45A;--tr:#C98B30}
+.l4 .mini{--sky1:#CDBEF4;--sky2:#F1ECFD;--hb:#D9CBF6;--hf:#B39DE8;--tr:#8A6BD6}
+body.th-par .mini{--sky1:#F9C3D8;--sky2:#FFF0F5;--hb:#FAD3E1;--hf:#F2A7C4;--tr:#D0628E;--c:#C2477A;--cm:#F4A6C3}
+/* 卡片標題後的點點線 */
+.wsplay .card h2::after,body.th-par .card h2::after{content:"";flex:1;min-width:30px;height:8px;margin-left:4px;
+  background:radial-gradient(circle,var(--cb,#8CBDE6) 3px,transparent 3.5px) 0 50%/14px 8px repeat-x}
+body.th-par .card h2::after{--cb:#F4A6C3}
+.wsplay .card{border-top:6px solid var(--c)}
+body.th-par .card{border-top:6px solid #F4A6C3}
+@media (max-width:440px){.mini-t{max-width:66%;padding:14px}.mini-pic{width:112px;right:10px}}
+@media (prefers-reduced-motion:reduce){.mini .cloud{animation:none}}

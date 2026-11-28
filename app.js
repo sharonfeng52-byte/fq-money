@@ -263,6 +263,18 @@
     ${[[40, 238], [78, 250], [700, 222], [742, 236], [770, 214], [230, 236]].map(([x, y]) => `<g><polygon points="${x},${y - 46} ${x - 16},${y} ${x + 16},${y}" fill="#5DAA45"/><polygon points="${x},${y - 46} ${x},${y} ${x + 16},${y}" fill="#4A9338"/><rect x="${x - 3}" y="${y}" width="6" height="10" fill="#7A5230"/></g>`).join('')}
     <path d="M0 292 Q200 270 400 288 T800 284 V320 H0Z" fill="#FFF4DD"/>
   </svg>`;
+
+  // 小型插畫場景（工作紙、家長角落）：白雲、山丘、圓框插畫；顏色跟隨該頁色系
+  const MINI = `<svg class="mini-svg" viewBox="0 0 800 240" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g class="cloud c1"><ellipse cx="120" cy="52" rx="40" ry="16" fill="#fff"/><ellipse cx="146" cy="42" rx="26" ry="19" fill="#fff"/><ellipse cx="97" cy="46" rx="20" ry="14" fill="#fff"/></g>
+    <g class="cloud c2"><ellipse cx="520" cy="36" rx="34" ry="13" fill="#fff"/><ellipse cx="543" cy="28" rx="21" ry="16" fill="#fff"/></g>
+    <path class="hb" d="M0 190 Q140 140 290 178 T560 168 T800 158 V240 H0Z"/>
+    <path class="hf" d="M0 214 Q180 178 360 206 T680 198 T800 196 V240 H0Z"/>
+    ${[[36, 196], [70, 206], [760, 186]].map(([x, y]) => `<g class="tr"><polygon points="${x},${y - 38} ${x - 13},${y} ${x + 13},${y}"/><rect x="${x - 2.5}" y="${y}" width="5" height="8" fill="#7A5230"/></g>`).join('')}
+  </svg>`;
+  const scenelet = (tag, title, sub, img) => `<section class="mini">${MINI}
+    <div class="mini-t">${tag ? `<span class="mini-tag">${tag}</span>` : ''}<h1>${esc(title)}</h1>${sub ? `<p>${esc(sub)}</p>` : ''}</div>
+    <img class="mini-pic" src="${art(img)}" alt=""></section>`;
   // 金幣：橫幅內掉下並輕輕浮動（只在首頁、介紹頁、登入頁）
   const COINS = `<div class="coins" aria-hidden="true">${[0, 1, 2, 3, 4].map(i => `<i style="--i:${i}">$</i>`).join('')}</div>`;
   const hero = (title, sub) => `<section class="hero">${COINS}<div class="t"><h1>${esc(title)}</h1><p>${esc(sub)}</p></div><img src="${art('kids')}" alt=""></section>`;
@@ -495,13 +507,13 @@
     const L = C.lessons[n]; if (!L) return pageHome();
     const forms = { 1: W1, 2: W2, 3: W3, 4: W4 };
     const F = forms[n];
-    shell(`<div class="${L.cls}">${banner(n, L.ws)}
+    shell(`<div class="${L.cls} wsplay">${scenelet(`${t('lessonNo')(n)}${SEP()}${esc(L.domain)}`, L.ws, L.en, 'm' + n)}
       <p class="muted" style="margin-top:8px">${esc(t('wsNote'))}</p>
       <form id="ws" onsubmit="return false">${F.html()}</form>
       <div class="err" id="wserr"></div>
       <button class="btn c full" id="send">${t('submit')}</button>
       <div id="wsok"></div>
-      <div class="gold">${quote(L.gold)}</div></div>`, { theme: L.cls });
+      <div class="gold">${quote(L.gold)}</div></div>`, { theme: L.cls, foot: true });
     const f = loadDraft(n);
     F.bind && F.bind(f);
     const changed = () => { $('#wserr').textContent = ''; F.calc && F.calc(); saveDraft(n, F.extra && F.extra()); };
@@ -707,7 +719,7 @@
   // ---------- 家長角落 ----------
   function pageParents() {
     const P = C.parents; const groups = Array.from({ length: CFG.GROUPS || 4 }, (_, i) => i + 1);
-    shell(`${hero(t('pTitle'), t('pSub'))}
+    shell(`${scenelet('', t('pTitle'), t('pSub'), 'kids')}
       <section class="card"><h2>${t('pSub')}</h2><p>${esc(P.intro)}</p>
         ${P.tips.map(([a, b]) => `<div class="node" style="margin-top:8px;--cl:#FFF5D6;--c:#B5651D"><b>${esc(a)}</b><span>${esc(b)}</span></div>`).join('')}
         <p style="margin-top:10px">${esc(P.end)}</p></section>
