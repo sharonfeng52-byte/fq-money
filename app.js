@@ -43,6 +43,7 @@
   const v = x => (isEN() && VAL[x]) ? VAL[x] : x; // 顯示中文選項的英文
   const T = {
     zh: {
+      maicT: '🎬 AI 互動課堂：第 2 堂完整示範', maicD: '用 OpenMAIC 製作，按一下即可觀看整堂課。',
       brand: '同一張鈔票', demo: '示範模式：資料只存在這部裝置。連接 Google Sheet 後會自動轉為正式模式。',
       home: '首頁', footprint: '我的足跡', parents: '家長角落', group: n => `第${n}組`, groupOpt: n => `第 ${n} 組`,
       before: '👋 開始之前', onlyNick: '只需要組別和暱稱，不用填真實姓名。', myGroup: '我的組別', choose: '請選擇', myNick: '我的暱稱',
@@ -98,6 +99,7 @@
       fbSatT: '⭐ 整體滿意度（平均）', fbRecT: '👍 會推薦給其他家長嗎？', fbChgT: '🌱 孩子最明顯的改變', fbSugT: '🔧 改善建議', fbNone: '未有家長提交評估表'
     },
     en: {
+      maicT: '🎬 AI interactive class: full Lesson 2', maicD: 'Made with OpenMAIC. Tap to watch the whole lesson.',
       brand: 'One Banknote', demo: 'Demo mode: data is saved on this device only. It switches to live mode once Google Sheet is connected.',
       home: 'Home', footprint: 'My journey', parents: 'For parents', group: n => `Group ${n}`, groupOpt: n => `Group ${n}`,
       before: '👋 Before you start', onlyNick: 'Just your group and a nickname. No real names needed.', myGroup: 'My group', choose: 'Choose', myNick: 'My nickname',
@@ -235,7 +237,7 @@
         <button class="chip" id="lang" aria-label="Language">${isEN() ? '中文' : 'EN'}</button>
         ${u && !opts.noUser ? `<button class="chip" id="who">${esc(t('group')(u.group))}${SEP()}${esc(u.nick)}</button>` : ''}</header>
       ${LIVE ? '' : `<div class="demo">${esc(t('demo'))}</div>`}
-      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${nav}${opts.wa ? `<a class="wa" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}<span>${esc(t('wa'))}</span></a>` : ''}`;
+      <main class="wrap ${opts.wide ? 'wide' : ''}">${body}</main>${opts.foot ? footerHtml() : ''}${nav}${opts.wa ? `<a class="wa" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}<span>${esc(t('wa'))}</span></a>` : ''}`;
     $('#lang').onclick = () => setLang(isEN() ? 'zh' : 'en');
     const who = $('#who');
     if (who) who.onclick = () => { store.set('fq_user', null); location.hash = '#/login'; route(); };
@@ -244,28 +246,90 @@
   // WhatsApp 課程查詢
   const WA_ICON = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>';
   const waLink = () => `https://wa.me/${(C.contact || {}).whatsapp || ''}?text=${encodeURIComponent((C.contact || {}).msg || '')}`;
-  const hero = (title, sub) => `<section class="hero"><div class="t"><h1>${esc(title)}</h1><p>${esc(sub)}</p></div><img src="${art('kids')}" alt=""></section>`;
+  // OpenMAIC 完整課堂連結（在 content.js 的 openmaic.url 填寫）
+  const openMaic = () => { const o = ZH.openmaic || {}; const u = String(o.url || '').trim(); return /^https?:\/\//.test(u) ? { url: u, lesson: +o.lesson || 2 } : null; };
+
+  // 首頁插畫場景（原創）：天空、白雲、太陽、山丘、松樹、金幣熱氣球
+  const SCENE = `<svg class="scene-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g class="sun"><circle cx="690" cy="62" r="30" fill="#FFD24D"/>${Array.from({ length: 12 }, (_, i) => `<rect x="686" y="14" width="8" height="16" rx="4" fill="#FFD24D" transform="rotate(${i * 30} 690 62)"/>`).join('')}</g>
+    <g class="cloud c1"><ellipse cx="120" cy="70" rx="44" ry="18" fill="#fff"/><ellipse cx="150" cy="58" rx="30" ry="22" fill="#fff"/><ellipse cx="95" cy="62" rx="22" ry="16" fill="#fff"/></g>
+    <g class="cloud c2"><ellipse cx="470" cy="46" rx="38" ry="15" fill="#fff"/><ellipse cx="495" cy="36" rx="24" ry="18" fill="#fff"/></g>
+    <g class="cloud c3"><ellipse cx="300" cy="110" rx="30" ry="12" fill="#fff" opacity=".85"/><ellipse cx="318" cy="102" rx="18" ry="13" fill="#fff" opacity=".85"/></g>
+    <g class="balloon"><path d="M590 120c-26 0-44-20-44-44s20-42 44-42 44 18 44 42-18 44-44 44z" fill="#F48FB1"/><path d="M590 34c-12 0-20 19-20 42s8 44 20 44 20-21 20-44-8-42-20-42z" fill="#FFD24D"/>
+      <text x="590" y="86" text-anchor="middle" font-family="Baloo 2,Nunito,sans-serif" font-weight="800" font-size="30" fill="#1F3A68">$</text>
+      <path d="M574 120l6 18M606 120l-6 18" stroke="#8A5A2B" stroke-width="2"/><rect x="578" y="136" width="24" height="16" rx="4" fill="#C98B05"/></g>
+    <path d="M0 230 Q120 170 250 215 T520 200 T800 190 V320 H0Z" fill="#B9E3A1"/>
+    <path d="M0 262 Q160 215 330 252 T640 240 T800 236 V320 H0Z" fill="#8FCF6E"/>
+    ${[[40, 238], [78, 250], [700, 222], [742, 236], [770, 214], [230, 236]].map(([x, y]) => `<g><polygon points="${x},${y - 46} ${x - 16},${y} ${x + 16},${y}" fill="#5DAA45"/><polygon points="${x},${y - 46} ${x},${y} ${x + 16},${y}" fill="#4A9338"/><rect x="${x - 3}" y="${y}" width="6" height="10" fill="#7A5230"/></g>`).join('')}
+    <path d="M0 292 Q200 270 400 288 T800 284 V320 H0Z" fill="#FFF4DD"/>
+  </svg>`;
+  // 金幣：橫幅內掉下並輕輕浮動（只在首頁、介紹頁、登入頁）
+  const COINS = `<div class="coins" aria-hidden="true">${[0, 1, 2, 3, 4].map(i => `<i style="--i:${i}">$</i>`).join('')}</div>`;
+  const hero = (title, sub) => `<section class="hero">${COINS}<div class="t"><h1>${esc(title)}</h1><p>${esc(sub)}</p></div><img src="${art('kids')}" alt=""></section>`;
+  // 慶祝彩紙：提交成功時從按鈕位置噴出
+  function confetti(el) {
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const r = (el || document.body).getBoundingClientRect();
+    const box = document.createElement('div'); box.className = 'confetti'; box.setAttribute('aria-hidden', 'true');
+    box.style.left = (r.left + r.width / 2) + 'px'; box.style.top = (r.top + 10) + 'px';
+    const cols = ['#FFD24D', '#4A8FD6', '#5DAA45', '#E9A417', '#8A6BD6', '#F48FB1', '#E05A47'];
+    for (let i = 0; i < 36; i++) {
+      const s = document.createElement('i');
+      const ang = (Math.random() * 140 + 20) * Math.PI / 180, dist = 90 + Math.random() * 170;
+      s.style.setProperty('--x', Math.round(Math.cos(ang) * dist * (Math.random() < .5 ? -1 : 1)) + 'px');
+      s.style.setProperty('--y', Math.round(-Math.sin(ang) * dist) + 'px');
+      s.style.setProperty('--r', Math.round(Math.random() * 720 - 360) + 'deg');
+      s.style.background = cols[i % cols.length]; s.style.animationDelay = (Math.random() * 80) + 'ms';
+      box.appendChild(s);
+    }
+    document.body.appendChild(box); setTimeout(() => box.remove(), 1600);
+  }
 
 
+
+  // 頁尾（介紹頁、首頁、家長角落）
+  function footerHtml() {
+    const L = n => C.lessons[n];
+    return `<footer class="foot-site"><div class="foot-in">
+      <div class="fb"><b class="flogo">${esc(t('brand'))}</b><span>${esc(C.mainline)}</span><a class="fwa" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}<span>${esc(t('wa'))}</span></a></div>
+      <div><h4>${isEN() ? 'Lessons' : '四堂課'}</h4>${[1, 2, 3, 4].map(n => `<a href="#/${user() ? 'lesson/' + n : 'login'}">${n}. ${esc(L(n).title)}</a>`).join('')}</div>
+      <div><h4>${isEN() ? 'Parents' : '家長'}</h4><a href="#/parents">${esc(t('parents'))}</a><a href="#/parents">${isEN() ? 'Parent feedback form' : '課後家長評估表'}</a>${openMaic() ? `<a href="${esc(openMaic().url)}" target="_blank" rel="noopener">${isEN() ? 'AI class (OpenMAIC)' : 'AI 互動課堂（OpenMAIC）'}</a>` : ''}</div>
+      <div><h4>${isEN() ? 'About' : '關於'}</h4><a href="#/intro">${isEN() ? 'About the course' : '課程介紹'}</a><span>${isEN() ? 'Designed by' : '課程設計'}：Sharon Feng</span></div>
+    </div><p class="fcopy">© 2026 ${esc(C.title)} · Sharon Feng</p></footer>`;
+  }
   // ---------- 課程介紹（未登入時的首頁）----------
   function pageIntro() {
-    const I = C.intro, colors = { 1: 'var(--b)', 2: 'var(--g)', 3: 'var(--y)', 4: 'var(--p)' };
+    const I = C.intro;
+    const mq = [1, 2, 3, 4, 5, 6, 7].map(m => `<span class="chipm">${icon('g' + m)}<b>${esc(C.methods[m].name)}</b></span>`).join('');
+    const om = openMaic();
+    const orn = s => `<h2 class="orn"><span>${esc(s)}</span></h2>`;
+    const go = n => `#/${user() ? 'lesson/' + n : 'login'}`;
     shell(`
-      <section class="hero"><div class="t"><span class="itag">${esc(I.tag)}</span><h1>${esc(I.title)}</h1><p>${esc(I.sub)}</p></div><img src="${art('kids')}" alt=""></section>
-      <section class="card"><h2>${esc(I.whyT)}</h2>${I.why.map(p => `<p style="margin-top:6px">${esc(p)}</p>`).join('')}</section>
-      <section class="card"><h2>${esc(I.lessonsT)}</h2>
-        ${[1, 2, 3, 4].map(n => { const L = C.lessons[n]; return `<div class="irow"><img src="${art('m' + n)}" alt=""><div><b style="color:${colors[n]}">${n}. ${esc(L.title)}</b><small>${esc(L.domain)}${SEP()}${quote(L.gold)}</small></div></div>`; }).join('')}</section>
-      <section class="card"><h2>${esc(I.howT)}</h2>
-        ${I.how.map(([a, b], i) => `<div class="istep"><b>${i + 1}. ${esc(a)}</b><span>${esc(b)}</span></div>`).join('')}
-        <p class="muted" style="margin-top:10px">${esc(I.howNote)}</p></section>
-      <section class="card" style="--c:var(--g);--cb:var(--gb);background:#F1FAEC"><h2>${esc(I.methodsT)}</h2>
-        <div class="badges">${[1, 2, 3, 4, 5, 6, 7].map(m => `<span title="${esc(C.methods[m].name)}">${icon('g' + m)}</span>`).join('')}</div>
-        <p class="muted" style="margin-top:8px">${[1, 2, 3, 4, 5, 6, 7].map(m => esc(C.methods[m].name)).join(isEN() ? ', ' : '、')}<br>${esc(I.methodsNote)}</p></section>
-      <section class="card"><h2>${esc(I.pathT)}</h2><div class="path">${C.path.map((x, i) => `<div>${icon('p' + (i + 1))}${esc(x)}</div>`).join('')}</div></section>
-      <section class="card"><h2>${esc(I.designerT)}</h2><p>${esc(I.designer)}</p></section>
-      <a class="btn full" style="display:block;text-align:center;text-decoration:none" href="#/${user() ? 'home' : 'login'}">${esc(I.start)}</a>
+      <section class="scene">${SCENE}
+        <div class="scene-t"><span class="itag">${esc(I.tag)}</span><h1>${esc(I.title)}</h1><p>${esc(I.sub)}</p>
+          <a class="btn scene-cta" href="#/${user() ? 'home' : 'login'}">${esc(I.start)}</a></div>
+        <img class="scene-kids" src="${art('kids')}" alt="">
+      </section>
+      <section class="card why"><h2>${esc(I.whyT)}</h2>${I.why.map((p, i) => `<p class="${i ? '' : 'lead'}">${esc(p)}</p>`).join('')}</section>
+      ${orn(I.lessonsT)}
+      <div class="lgrid">${[1, 2, 3, 4].map(n => { const L = C.lessons[n]; return `<article class="lbox ${L.cls}" style="--i:${n}">
+        <div class="lpic"><img src="${art('m' + n)}" alt=""><span class="lbadge">${icon('g' + L.methods[0])}</span></div>
+        <div class="lpanel"><span class="lno">${esc(t('lessonNo')(n))}</span><b>${esc(L.title)}</b><small>${esc(L.domain)}</small><q>${esc(L.gold)}</q>
+          <div class="lbtns"><a href="${go(n)}">${isEN() ? 'Open lesson' : '進入課堂'}</a>${(om && om.lesson === n) ? `<a href="${esc(om.url)}" target="_blank" rel="noopener">${isEN() ? '▶ AI class' : '▶ AI 課堂'}</a>` : `<a href="#/${user() ? 'ws/' + n : 'login'}">${isEN() ? 'Worksheet' : '工作紙'}</a>`}</div></div>
+      </article>`; }).join('')}</div>
+      ${om ? `<a class="maic" href="${esc(om.url)}" target="_blank" rel="noopener"><span class="maic-ic" aria-hidden="true">▶</span><span><b>${esc(t('maicT'))}</b><small>${esc(t('maicD'))}</small></span></a>` : ''}
+      ${orn(I.howT)}
+      <section class="card"><div class="tiles">${I.how.map(([x, y], i) => `<div class="tile t${i + 1}"><span class="tn">${i + 1}</span><b>${esc(x)}</b><span>${esc(y)}</span></div>`).join('')}</div>
+        <p class="muted" style="margin-top:12px">${esc(I.howNote)}</p></section>
+      ${orn(I.methodsT)}
+      <section class="card mcard"><div class="marquee"><div class="mtrack">${mq}${mq}</div></div>
+        <p class="muted" style="margin-top:10px">${esc(I.methodsNote)}</p></section>
+      ${orn(I.pathT)}
+      <section class="card"><div class="path hop">${C.path.map((x, i) => `<div style="--i:${i}">${icon('p' + (i + 1))}${esc(x)}</div>`).join('')}</div></section>
+      <section class="card designer"><h2>${esc(I.designerT)}</h2><p>${esc(I.designer)}</p><p class="sig">— Sharon Feng</p></section>
+      <a class="btn full big-cta" style="display:block;text-align:center;text-decoration:none" href="#/${user() ? 'home' : 'login'}">${esc(I.start)}</a>
       <a class="btn ghost full" style="display:block;text-align:center;text-decoration:none" href="#/parents">${esc(I.parent)}</a>
-      <div class="gold">${quote(C.motto)}</div>`, { noNav: !user(), noUser: !user(), on: 'home', wa: true });
+      <div class="gold">${quote(C.motto)}</div>`, { noNav: !user(), noUser: !user(), on: 'home', wa: true, foot: true });
   }
   // ---------- 登入 ----------
   function pageLogin() {
@@ -299,7 +363,7 @@
         <p class="muted" style="margin-top:6px">${esc(t('badgeTip'))}</p></section>
       <div id="lessons">${[1, 2, 3, 4].map(n => lessonCard(n, d, true)).join('')}</div>
       <a class="btn ghost full" style="display:block;text-align:center;text-decoration:none" href="#/intro">${esc(C.intro.back)}</a>
-      <div class="gold">${quote(C.motto)}</div>`, { on: 'home', wa: true });
+      <div class="gold">${quote(C.motto)}</div>`, { on: 'home', wa: true, foot: true });
     const cfg = await api({ action: 'config' });
     if (cfg.ok && $('#lessons')) $('#lessons').innerHTML = [1, 2, 3, 4].map(n => lessonCard(n, d, !!cfg.open[n])).join('');
     // 同步已提交紀錄（換裝置也能看到徽章）
@@ -313,7 +377,7 @@
   function lessonCard(n, d, open) {
     const L = C.lessons[n];
     const tag = d[n] ? t('done') : open ? t('go') : '🔒';
-    return `<a class="lesson-card ${L.cls} ${open ? '' : 'locked'}" href="#/lesson/${n}"><img src="${art('m' + n)}" alt="">
+    return `<a class="lesson-card ${L.cls} ${open ? '' : 'locked'}" style="--i:${n}" href="#/lesson/${n}"><img src="${art('m' + n)}" alt="">
       <div class="tx"><b>${n}. ${esc(L.title)}</b><small>${esc(L.domain)}${SEP()}${esc(L.ws)}</small></div><span class="tag">${tag}</span></a>`;
   }
 
@@ -333,6 +397,7 @@
       <section class="card"><h2><span class="n">2</span>${t('methods')}</h2>
         ${L.methods.map(m => `<div class="method">${icon('g' + m)}<div><b>${esc(C.methods[m].name)}</b><br><span>${esc(C.methods[m].q)}</span></div></div>`).join('')}</section>
       ${n === 4 ? `<section class="card"><h2>${t('myNote')}</h2><div id="mynote" class="muted">${t('loading')}</div></section>` : ''}
+      ${(openMaic() && openMaic().lesson === n) ? `<a class="maic" href="${esc(openMaic().url)}" target="_blank" rel="noopener"><span class="maic-ic" aria-hidden="true">▶</span><span><b>${esc(t('maicT'))}</b><small>${esc(t('maicD'))}</small></span></a>` : ''}
       ${polls.map(([id, p]) => pollBlock(id, p)).join('')}
       ${walls.map(([id, w]) => wallBlock(id, w)).join('')}
       <a class="btn c full" style="display:block;text-align:center;text-decoration:none" href="#/ws/${n}">${esc(t('fill')(L.ws))}</a>
@@ -451,7 +516,8 @@
       $('#send').disabled = false; $('#send').textContent = t('resubmit');
       if (!r.ok) { $('#wserr').textContent = r.error || t('subFail'); return; }
       const d = done(); d[n] = true; store.set('fq_done', d);
-      $('#wsok').innerHTML = `<div class="okmsg">${t('subOk')}</div><div class="badges" style="margin-top:8px">${WS_METHODS[n].map(m => icon('g' + m)).join('')}</div>`;
+      $('#wsok').innerHTML = `<div class="okmsg">${t('subOk')}</div><div class="badges popin" style="margin-top:8px">${WS_METHODS[n].map((m, i) => `<span style="--i:${i}">${icon('g' + m)}</span>`).join('')}</div>`;
+      confetti($('#send'));
       $('#wsok').scrollIntoView({ behavior: 'smooth' });
     };
   }
@@ -652,7 +718,7 @@
         <a class="btn full wa-btn" href="${waLink()}" target="_blank" rel="noopener">${WA_ICON}${esc(t('waBtn'))}</a></section>
       ${fbForm(groups)}
       <section class="card"><h2>${t('books')}</h2>${P.books.map(([a, b]) => `<p style="margin-top:6px"><b>${esc(a)}</b>${COL()}${esc(b)}</p>`).join('')}</section>
-      <div class="gold">${quote(C.motto)}</div>`, { on: 'parents', theme: 'th-par', wa: true });
+      <div class="gold">${quote(C.motto)}</div>`, { on: 'parents', theme: 'th-par', wa: true, foot: true });
     $('#pgo').onclick = async () => {
       const nick = $('#pn').value.trim(); if (!nick) { $('#pres').innerHTML = `<p class="err">${t('needChild')}</p>`; return; }
       const m = await api({ action: 'mine', group: $('#pg').value, nick });
@@ -699,6 +765,7 @@
       if (!r.ok) { $('#ferr').textContent = r.error || t('subFail'); return; }
       $('#fsend').hidden = true;
       $('#fdone').innerHTML = `<div class="okmsg">${esc(t('fbOk'))}</div>`;
+      confetti($('#fdone'));
     };
   }
 

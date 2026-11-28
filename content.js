@@ -75,6 +75,9 @@ window.FQ = {
   },
 
 
+  // OpenMAIC 完整課堂：把公開網址貼在 url 的引號內；留空即不顯示
+  openmaic: { url: 'https://open.maic.chat/classroom/stage-Zpv77g9Gnc?ref=share', lesson: 2 },
+
   // 首頁課程介紹（未登入時看到）
   intro: {
     tag: '兒童財商系列課程｜4 堂｜11–12 歲',

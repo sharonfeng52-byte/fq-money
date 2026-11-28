@@ -231,3 +231,175 @@ a.btn.c{background:var(--sun);color:var(--navy);box-shadow:0 4px 0 #C99A12}
 .istep{border:2px solid #C9D6EA;background:#EEF4FB;border-radius:16px;padding:9px 14px;margin-top:10px}
 .istep b{display:block;font-family:var(--font-head);color:var(--navy)}
 .istep span{font-size:14.5px}
+
+/* ===== 動感層：一個開場時刻＋回應操作的動態 ===== */
+:root{--ease-out:cubic-bezier(.16,1,.3,1);--ease-bounce:cubic-bezier(.34,1.56,.64,1)}
+.hero{position:relative}
+.hero .t,.hero img{position:relative;z-index:1}
+/* 開場：標題彈出、小朋友升起、金幣掉落 */
+.hero h1{animation:popTitle .7s var(--ease-bounce) both}
+.hero p,.hero .itag{animation:fadeUp .6s var(--ease-out) .25s both}
+.hero img{animation:riseIn .8s var(--ease-out) .1s both, bob 4.5s ease-in-out 1s infinite}
+.coins{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.coins i{position:absolute;top:-30px;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF3B0,#FFC93C 55%,#E0A20E);
+  border:2px solid #C98B05;color:#A86F00;font:900 13px/22px var(--font-head);text-align:center;font-style:normal;box-shadow:0 3px 6px rgba(160,110,0,.3);
+  animation:coinDrop .9s var(--ease-bounce) calc(.35s + var(--i)*.12s) both, coinFloat 3.6s ease-in-out calc(1.4s + var(--i)*.4s) infinite}
+.coins i:nth-child(1){left:60%;--land:18px}
+.coins i:nth-child(2){left:71%;--land:44px;width:20px;height:20px;line-height:16px;font-size:11px}
+.coins i:nth-child(3){left:82%;--land:8px;width:22px;height:22px;line-height:18px}
+.coins i:nth-child(4){left:91%;--land:36px;width:18px;height:18px;line-height:14px;font-size:10px}
+.coins i:nth-child(5){left:52%;--land:-2px;width:16px;height:16px;line-height:12px;font-size:9px}
+@keyframes coinDrop{from{transform:translateY(0) rotate(-40deg);opacity:0}to{transform:translateY(calc(var(--land) + 30px)) rotate(0);opacity:1}}
+@keyframes coinFloat{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@keyframes popTitle{0%{transform:scale(.6) rotate(-4deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes fadeUp{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+@keyframes riseIn{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -5px}}
+
+/* 首頁課題卡依次滑入；按下有彈性回饋 */
+.lesson-card{animation:cardIn .6s var(--ease-out) calc(.45s + var(--i,0)*.09s) both;transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out)}
+@keyframes cardIn{from{transform:translateX(-24px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+@media (hover:hover){.lesson-card:hover{transform:translateY(-3px) rotate(-.4deg);box-shadow:0 8px 0 var(--cm)}
+  .card:hover{box-shadow:0 6px 0 var(--cm,#dbe4f0)}}
+.lesson-card .tag{transition:transform .3s var(--ease-bounce)}
+.lesson-card:hover .tag{transform:scale(1.08)}
+.btn,.opt,.pill,.seg label,.chip,.lesson-card,.lcard,.wa,.maic{-webkit-tap-highlight-color:transparent}
+.btn:active,.opt:active,.chip:active,.lcard:active,.maic:active{transform:scale(.96)}
+.btn,.opt,.chip{transition:transform .18s var(--ease-out),background .2s,box-shadow .2s}
+.opt.on{animation:pick .35s var(--ease-bounce)}
+@keyframes pick{0%{transform:scale(.94)}100%{transform:none}}
+
+/* 介紹頁：可左右滑動的課題卡 */
+.sec-h{font-family:var(--font-head);font-weight:800;font-size:clamp(20px,4.6vw,24px);color:var(--navy);margin:22px 4px 0}
+.why .lead{font-size:17px;font-weight:700;color:var(--navy);margin-top:4px}
+.why p+p{margin-top:8px}
+.snap{display:grid;grid-auto-flow:column;grid-auto-columns:min(72%,250px);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 4px 16px;margin:0 -4px;scrollbar-width:thin}
+.lcard{scroll-snap-align:start;position:relative;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);background:var(--cl);border:3px solid var(--cb);border-radius:24px;overflow:hidden;
+  box-shadow:0 5px 0 var(--cm);animation:cardIn .6s var(--ease-out) calc(.5s + var(--i)*.1s) both;transition:transform .25s var(--ease-out)}
+.lcard img{width:100%;height:120px;object-fit:cover;object-position:center 30%}
+.lcard .lnum{position:absolute;top:10px;left:10px;width:38px;height:38px;border-radius:50%;background:var(--c);color:#fff;font:800 20px/38px var(--font-head);text-align:center;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.lcard b{font-family:var(--font-head);font-size:19px;color:var(--c);padding:10px 14px 0;line-height:1.3}
+.lcard small{padding:2px 14px 0;color:#4a5672;font-size:13px}
+.lcard q{display:block;margin:10px 14px 14px;padding:8px 10px;background:#fff;border-radius:12px;font-size:13.5px;font-weight:700;color:var(--navy);quotes:"「" "」" "“" "”"}
+html[lang=en] .lcard q{quotes:"“" "”"}
+@media (hover:hover){.lcard:hover{transform:translateY(-4px) rotate(-.6deg)}}
+.snap::-webkit-scrollbar{height:6px}.snap::-webkit-scrollbar-thumb{background:var(--cb,#c9d1de);border-radius:6px}
+
+/* 每一堂怎樣上：四色方塊 */
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{border-radius:18px;padding:12px 12px 14px;display:flex;flex-direction:column;gap:2px}
+.tile .tn{font:800 28px/1 var(--font-head);opacity:.9}
+.tile b{font-family:var(--font-head);font-size:17px}
+.tile span:last-child{font-size:13.5px;line-height:1.45}
+.t1{background:#E6F1FC;color:#1F5FA8}.t2{background:#EAF6E3;color:#2E7D32}.t3{background:#FFF5D6;color:#8A4E12}.t4{background:#F0EAFB;color:#5B3FA8}
+.tile span:last-child{color:var(--ink)}
+
+/* 七個綠色理財法：流動彩帶 */
+.mcard{background:#F1FAEC;--c:var(--g);--cb:var(--gb)}
+.marquee{overflow:hidden;margin:4px -18px 0;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mtrack{display:flex;gap:10px;width:max-content;padding:6px 0;animation:marq 26s linear infinite}
+.marquee:hover .mtrack{animation-play-state:paused}
+.chipm{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--gb);border-radius:30px;padding:4px 14px 4px 4px;white-space:nowrap}
+.chipm .ic{width:40px;height:40px}
+.chipm b{font-family:var(--font-head);color:var(--g);font-size:15px}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* 六步路徑：圖示逐個跳起 */
+.path.hop .ic{animation:hop 2.4s var(--ease-out) calc(var(--i)*.18s) infinite}
+@keyframes hop{0%,70%,100%{transform:none}80%{transform:translateY(-8px) scale(1.06)}90%{transform:translateY(0) scale(.98)}}
+.designer .sig{text-align:right;font-family:var(--font-head);color:var(--navy);margin-top:8px}
+.big-cta{font-size:18px;padding:14px 18px;position:relative;overflow:hidden}
+.big-cta::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-100%);animation:shine 3.2s ease-in-out 1.6s infinite}
+@keyframes shine{0%,60%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* OpenMAIC 完整課堂連結 */
+.maic{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 16px;border-radius:20px;text-decoration:none;color:#fff;background:var(--g);box-shadow:0 5px 0 #1E5E22;transition:transform .2s var(--ease-out)}
+.maic b{display:block;font-family:var(--font-head);font-size:17px}.maic small{opacity:.95;font-size:13px}
+.maic-ic{width:44px;height:44px;flex:none;border-radius:50%;background:#fff;color:var(--g);display:flex;align-items:center;justify-content:center;font-size:18px;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}50%{box-shadow:0 0 0 8px rgba(255,255,255,0)}}
+
+/* 提交成功：徽章彈出＋彩紙 */
+.popin span{display:inline-block;animation:badgePop .6s var(--ease-bounce) calc(.15s + var(--i)*.12s) both}
+@keyframes badgePop{0%{transform:scale(0) rotate(-30deg)}100%{transform:none}}
+.okmsg{animation:fadeUp .4s var(--ease-out) both}
+.confetti{position:fixed;width:0;height:0;z-index:50;pointer-events:none}
+.confetti i{position:absolute;width:9px;height:14px;border-radius:3px;animation:conf 1.3s cubic-bezier(.2,.7,.3,1) forwards}
+.confetti i:nth-child(3n){width:10px;height:10px;border-radius:50%}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}70%{opacity:1}100%{transform:translate(var(--x),calc(var(--y) + 160px)) rotate(var(--r));opacity:0}}
+
+/* WhatsApp 浮動按鈕：輕輕彈一下吸引注意 */
+.wa{animation:waIn .6s var(--ease-bounce) 1.2s both}
+@keyframes waIn{from{transform:scale(0)}to{transform:none}}
+
+/* 尊重「減少動態」設定 */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .coins i{top:auto;bottom:8px}
+}
+
+/* ===== 遊樂場感：彩虹頂條、插畫場景、彩色課題卡、裝飾標題、頁尾 ===== */
+.top{border-top:4px solid transparent;border-image:linear-gradient(90deg,#F0B429 0 20%,#E05A47 20% 40%,#8FCF6E 40% 60%,#5B9BD8 60% 80%,#9B7FD9 80% 100%) 1}
+/* 插畫場景橫幅（全寬） */
+.scene{position:relative;margin:0 calc(50% - 50vw);height:clamp(380px,62vw,460px);background:linear-gradient(#A8D8F8,#D6EEFC 70%);overflow:hidden}
+.scene-svg{position:absolute;inset:auto 0 0 0;width:100%;height:100%}
+.scene .cloud{animation:drift 38s linear infinite}
+.scene .c2{animation-duration:52s;animation-delay:-20s}.scene .c3{animation-duration:30s;animation-delay:-8s}
+@keyframes drift{from{transform:translateX(-160px)}to{transform:translateX(900px)}}
+.scene .sun{transform-origin:690px 62px;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scene .balloon{animation:bal 6s ease-in-out infinite}
+@keyframes bal{0%,100%{transform:translate(0,0)}50%{transform:translate(-14px,-12px)}}
+.scene-t{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:26px 18px 0}
+.scene-t .itag{font-weight:800;color:var(--navy);background:rgba(255,255,255,.75);border-radius:14px;padding:3px 10px}
+.scene-t h1{font-family:var(--font-head);font-weight:800;color:#fff;font-size:clamp(34px,8.5vw,54px);line-height:1.12;margin-top:10px;max-width:11em;text-wrap:balance;
+  --o:var(--navy);text-shadow:3px 0 0 var(--o),-3px 0 0 var(--o),0 3px 0 var(--o),0 -3px 0 var(--o),2.2px 2.2px 0 var(--o),-2.2px 2.2px 0 var(--o),2.2px -2.2px 0 var(--o),-2.2px -2.2px 0 var(--o),0 8px 16px rgba(31,58,104,.3);
+  animation:popTitle .7s var(--ease-bounce) both}
+.scene-t p{font-weight:800;color:var(--navy);margin-top:8px;animation:fadeUp .6s var(--ease-out) .25s both}
+.scene-cta{display:inline-block;margin-top:14px;background:var(--sun);color:var(--navy);text-decoration:none;box-shadow:0 4px 0 #C99A12;animation:fadeUp .6s var(--ease-out) .4s both}
+.scene-kids{position:absolute;z-index:1;right:max(10px,calc(50% - 380px));bottom:18px;width:clamp(150px,40vw,250px);border-radius:50%;aspect-ratio:1;object-fit:cover;object-position:center 20%;
+  border:5px solid #fff;box-shadow:0 10px 24px rgba(31,58,104,.25);animation:riseIn .8s var(--ease-out) .15s both, bob 4.5s ease-in-out 1s infinite}
+body.th-home .wrap>.scene+.card{margin-top:-6px}
+
+/* 裝飾標題：線＋圓點 */
+.orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:28px 0 4px;font-family:var(--font-head);font-weight:800;font-size:clamp(21px,5vw,26px);color:#E05A47;text-align:center}
+.orn::before,.orn::after{content:"";flex:0 1 70px;height:12px;background:radial-gradient(circle,#5B9BD8 5px,transparent 5.5px) center/12px 12px no-repeat,linear-gradient(#8CBDE6,#8CBDE6) left 2px/100% 2px no-repeat,linear-gradient(#8CBDE6,#8CBDE6) left 8px/72% 2px no-repeat}
+.orn::before{background-position:right center,left 2px,left 8px}
+.orn::after{transform:scaleX(-1)}
+
+/* 彩色課題卡：圖片＋顏色面板＋圓形徽章 */
+.lgrid{display:grid;gap:14px;margin-top:12px}
+.lbox{display:grid;grid-template-columns:42% 1fr;border-radius:22px;overflow:hidden;background:var(--c);box-shadow:0 6px 0 var(--cm),0 10px 22px rgba(31,58,104,.12);
+  animation:cardIn .6s var(--ease-out) calc(.2s + var(--i)*.1s) both;transition:transform .25s var(--ease-out)}
+@media (hover:hover){.lbox:hover{transform:translateY(-4px)}}
+.lpic{position:relative}.lpic>img{width:100%;height:100%;min-height:170px;object-fit:cover;object-position:center 30%}
+.lbadge{position:absolute;top:12px;left:12px;width:58px;height:58px;border-radius:50%;background:var(--c);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.lbadge .ic{width:44px;height:44px;border:0;box-shadow:none}
+.lpanel{color:#fff;padding:14px 16px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
+.lno{font-size:13px;font-weight:800;opacity:.9}
+.lpanel b{font-family:var(--font-head);font-size:clamp(19px,4.6vw,23px);line-height:1.25}
+.lpanel small{font-size:13px;opacity:.92}
+.lpanel q{quotes:"「" "」";font-size:13px;font-weight:700;margin:6px 0 4px;opacity:.95}
+html[lang=en] .lpanel q{quotes:"“" "”"}
+.lbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.lbtns a{background:#fff;color:var(--c);text-decoration:none;font-family:var(--font-head);font-weight:700;font-size:14px;padding:7px 14px;border-radius:10px;box-shadow:0 3px 0 rgba(0,0,0,.15);transition:transform .18s var(--ease-out)}
+.lbtns a:active{transform:scale(.95)}
+@media (max-width:440px){.lbox{grid-template-columns:1fr}.lpic>img{min-height:0;height:150px}}
+
+/* 頁尾：深藍底＋菱形紋 */
+.foot-site{margin:34px calc(50% - 50vw) 0;background:#173A52;background-image:linear-gradient(45deg,rgba(255,255,255,.035) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.035) 75%),linear-gradient(45deg,rgba(255,255,255,.035) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.035) 75%);
+  background-size:28px 28px;background-position:0 0,14px 14px;color:#D6E3EE;border-top:4px solid transparent;border-image:linear-gradient(90deg,#F0B429 0 20%,#E05A47 20% 40%,#8FCF6E 40% 60%,#5B9BD8 60% 80%,#9B7FD9 80% 100%) 1}
+.foot-in{max-width:760px;margin:0 auto;padding:28px 18px 10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px}
+.foot-site h4{font-family:var(--font-head);color:#fff;font-size:17px;padding-bottom:6px;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,.2)}
+.foot-site a,.foot-site span{display:block;color:#D6E3EE;text-decoration:none;font-size:14px;margin:5px 0}
+.foot-site a:hover{color:#fff}
+.foot-site .fb{display:flex;flex-direction:column}
+.flogo{font-family:var(--font-head);font-weight:800;font-size:24px;color:#fff;--o:#E05A47}
+.fwa{display:inline-flex!important;align-items:center;gap:6px;background:#25D366;color:#fff!important;border-radius:12px;padding:7px 12px;width:max-content;margin-top:10px!important;font-weight:700}
+.fwa svg{width:18px;height:18px}
+.fcopy{text-align:center;font-size:12.5px;color:#9FB6C8;background:#0F2A3C;margin:14px 0 0;padding:12px}
+.foot-site~.nav{position:fixed}
+main.wrap{padding-bottom:0}
+body:not(.th-x) main.wrap{padding-bottom:20px}
+.foot-site{padding-bottom:70px}
+@media (prefers-reduced-motion:reduce){.scene .cloud,.scene .sun,.scene .balloon{animation:none}}
+@media (max-width:600px){.scene .balloon{display:none}.scene-kids{bottom:30px}}
