@@ -43,7 +43,7 @@
   const v = x => (isEN() && VAL[x]) ? VAL[x] : x; // 顯示中文選項的英文
   const T = {
     zh: {
-      maicT: '🎬 AI 互動課堂：第 2 堂完整示範', maicD: '用 OpenMAIC 製作，按一下即可觀看整堂課。',
+      maicT: '🎬 AI 互動課堂：第 2 堂完整示範', maicD: '按一下即可觀看整堂課。',
       brand: '同一張鈔票', demo: '示範模式：資料只存在這部裝置。連接 Google Sheet 後會自動轉為正式模式。',
       home: '首頁', footprint: '我的足跡', parents: '家長角落', group: n => `第${n}組`, groupOpt: n => `第 ${n} 組`,
       before: '👋 開始之前', onlyNick: '只需要組別和暱稱，不用填真實姓名。', myGroup: '我的組別', choose: '請選擇', myNick: '我的暱稱',
@@ -99,7 +99,7 @@
       fbSatT: '⭐ 整體滿意度（平均）', fbRecT: '👍 會推薦給其他家長嗎？', fbChgT: '🌱 孩子最明顯的改變', fbSugT: '🔧 改善建議', fbNone: '未有家長提交評估表'
     },
     en: {
-      maicT: '🎬 AI interactive class: full Lesson 2', maicD: 'Made with OpenMAIC. Tap to watch the whole lesson.',
+      maicT: '🎬 AI interactive class: full Lesson 2', maicD: 'Tap to watch the whole lesson.',
       brand: 'One Banknote', demo: 'Demo mode: data is saved on this device only. It switches to live mode once Google Sheet is connected.',
       home: 'Home', footprint: 'My journey', parents: 'For parents', group: n => `Group ${n}`, groupOpt: n => `Group ${n}`,
       before: '👋 Before you start', onlyNick: 'Just your group and a nickname. No real names needed.', myGroup: 'My group', choose: 'Choose', myNick: 'My nickname',
